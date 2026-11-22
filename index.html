@@ -166,7 +166,8 @@ try{
  });
  document.getElementById("legend").innerHTML=leg.join("");
  m.on("popupopen",e=>{const im=e.popup.getElement().querySelector("img");const up=()=>{e.popup.update()};if(im&&!im.complete){im.addEventListener("load",up);im.addEventListener("error",up)}else up();});
- const fit=()=>{m.invalidateSize();if(pts.length)m.fitBounds(pts,{padding:[30,30],maxZoom:11})};
+ let popOpen=false;m.on("popupopen",()=>popOpen=true);m.on("popupclose",()=>popOpen=false);
+ const fit=()=>{if(popOpen)return;m.invalidateSize();if(pts.length)m.fitBounds(pts,{padding:[30,30],maxZoom:11})};
  fit();window.addEventListener("load",fit);setTimeout(fit,600);
  if(window.ResizeObserver)new ResizeObserver(()=>fit()).observe(document.getElementById("map"));
 }catch(e){document.getElementById("map").outerHTML='<p class="maphint">Karte konnte nicht geladen werden.</p>';}
