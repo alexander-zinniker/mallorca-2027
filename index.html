@@ -312,6 +312,7 @@ const reg=document.getElementById("reg");const nw=document.getElementById("nw");
 const f=n=>"CHF "+Math.round(n).toLocaleString("de-CH");
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const SITE="https://alexander-zinniker.github.io/mallorca-2027/";
+const waT=t=>"https://wa.me/?text="+encodeURIComponent(t);
 const wa=x=>"https://wa.me/?text="+encodeURIComponent(`🏡 ${x.name}\n📍 ${x.ort}\n💰 ${f(x.price)} für 14 Nächte (19.6.–3.7.2027)\n👉 ${SITE}#h${D.indexOf(x)}`);
 const rk=x=>x.score?(x.score/x.max)*Math.min(x.n,20):0;
 const FL=[
@@ -336,13 +337,15 @@ function drawTravel(){
  <div class="tl"><b>Rück</b> Sa 3.7. · ${o.back[1]} Palma → ${o.back[2]} Zürich · ${o.back[0]}</div>
  <div class="price">ca. ${f(o.price)} <span class="pp">für 4 Personen · ca. ${f(o.price/4)} pro Person</span></div>
  ${o.note?`<div class="loc">${esc(o.note)}</div>`:""}
- <a class="go" href="${o.url}" target="_blank" rel="noopener">Diese Flüge buchen</a></div>`).join("");
+ <a class="go" href="${o.url}" target="_blank" rel="noopener">Diese Flüge buchen</a>
+ <a class="go wa" href="${waT(`✈️ Flug ${o.air}\nHin Sa 19.6. ${o.out[1]} Zürich → ${o.out[2]} Palma (${o.out[0]})\nRück Sa 3.7. ${o.back[1]} Palma → ${o.back[2]} Zürich (${o.back[0]})\n💰 ca. ${f(o.price)} für 4 Personen\n👉 ${SITE}#${o.id}`)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div>`).join("");
  document.getElementById("cars").innerHTML=CARS.map(o=>`<div class="tc rv${o.rec?" rec":""}" id="${o.id}">${o.tag?`<span class="badge${o.alt?" alt":""}">${o.tag}</span>`:""}
  <div class="t"><h4>${esc(o.name)} <span class="pp">oder ähnlich</span></h4>${tFav(o.id)}</div>${tStars(o.id)}
  <div class="loc">${esc(o.cls)} · Automatik</div>
  <div class="price">ca. ${f(o.price)} <span class="pp">pro Auto · 2 Autos ca. ${f(o.price*2)}</span></div>
  <div class="loc">ca. ${f(o.price/14)} pro Tag und Auto · pro Paar ein Auto</div>
- <a class="go" href="${SIXT}" target="_blank" rel="noopener">Bei Sixt ansehen (Daten vorausgefüllt)</a></div>`).join("");
+ <a class="go" href="${SIXT}" target="_blank" rel="noopener">Bei Sixt ansehen (Daten vorausgefüllt)</a>
+ <a class="go wa" href="${waT(`🚗 Mietwagen ${o.name} oder ähnlich (Sixt, Flughafen Palma)\n💰 ca. ${f(o.price)} pro Auto · 2 Autos ca. ${f(o.price*2)}\n👉 ${SITE}#${o.id}`)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div>`).join("");
  const fr=FL[0].price,cr=CARS[0].price*2;
  document.getElementById("tsum").textContent=`Grobe Rechnung mit der Empfehlung: Flüge ca. ${f(fr)} + 2 × BMW 1er ca. ${f(cr)} = ca. ${f(fr+cr)} total, also ca. ${f((fr+cr)/2)} pro Paar (zusätzlich zum Haus, ohne Gepäck und Benzin).`;
 }
@@ -363,7 +366,7 @@ function draw(){drawTravel();
  <div class="meter" title="Anteil am Budget"><i style="width:${Math.min(100,x.price/B*100)}%"></i></div>
  <div class="loc">${Math.round(x.price/B*100)}% vom Budget${x.sz?` · 🛏 ${x.sz} Schlafzimmer`:""}${x.bz?` · 🚿 ${x.bz} Bad`:""}</div>
  <div class="tags">${x.hl.map(h=>`<span>${esc(h)}</span>`).join("")}</div>
- <a class="go" href="${esc(x.url)}" target="_blank" rel="noopener">Ansehen auf ${esc(x.src)}</a><a class="go wa" href="${wa(x)}" target="_blank" rel="noopener">💬 In WhatsApp teilen</a></div></article>`).join("")||"<p>Keine Häuser gefunden.</p>";
+ <a class="go" href="${esc(x.url)}" target="_blank" rel="noopener">Ansehen auf ${esc(x.src)}</a><a class="go wa" href="${wa(x)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div></article>`).join("")||"<p>Keine Häuser gefunden.</p>";
  document.querySelectorAll(".fav").forEach(b=>b.onclick=()=>toggle(b.dataset.id));
  drawRank();if(typeof drawMap==="function")drawMap();
 }
@@ -402,7 +405,7 @@ try{
  window.addMarker=(x,i,k,col)=>{
   const ic=L.divIcon({className:"",html:`<div class="num ${col}">${k+1}</div>`,iconSize:[26,26],iconAnchor:[13,13]});
   L.marker([x.lat,x.lng],{icon:ic,title:x.name,zIndexOffset:100-k}).addTo(layer)
-   .bindPopup(()=>`<div class="pop">${x.img?`<img class="popimg" src="${esc(x.img)}" alt="${esc(x.name)}" onerror="this.remove()">`:""}<b>${x.top?"🏆 ":""}${esc(x.name)}</b><br>📍 ${esc(x.ort)}<br>💰 ${f(x.price)} gesamt<br>👍 ${x.score?`${String(x.score).replace(".",",")} von ${x.max} (${x.n} ${x.n==1?"Bewertung":"Bewertungen"}, ${esc(x.rsrc)})`:`Noch keine Bewertungen (${esc(x.rsrc)})`}<br>⭐ ${who(x).length?`${who(x).length}: ${who(x).map(esc).join(", ")}`:"Noch keine Sterne der Gruppe"}<br><a href="#h${i}" onclick="goHouse(${i});return false">Zum Haus ↓</a><a href="${esc(x.url)}" target="_blank" rel="noopener">Beim Anbieter ↗</a><br><a href="${wa(x)}" target="_blank" rel="noopener">💬 In WhatsApp teilen</a></div>`);
+   .bindPopup(()=>`<div class="pop">${x.img?`<img class="popimg" src="${esc(x.img)}" alt="${esc(x.name)}" onerror="this.remove()">`:""}<b>${x.top?"🏆 ":""}${esc(x.name)}</b><br>📍 ${esc(x.ort)}<br>💰 ${f(x.price)} gesamt<br>👍 ${x.score?`${String(x.score).replace(".",",")} von ${x.max} (${x.n} ${x.n==1?"Bewertung":"Bewertungen"}, ${esc(x.rsrc)})`:`Noch keine Bewertungen (${esc(x.rsrc)})`}<br>⭐ ${who(x).length?`${who(x).length}: ${who(x).map(esc).join(", ")}`:"Noch keine Sterne der Gruppe"}<br><a href="#h${i}" onclick="goHouse(${i});return false">Zum Haus ↓</a><a href="${esc(x.url)}" target="_blank" rel="noopener">Beim Anbieter ↗</a><br><a href="${wa(x)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div>`);
  };
  m.on("popupopen",e=>{const im=e.popup.getElement().querySelector("img");const up=()=>{e.popup.update()};if(im&&!im.complete){im.addEventListener("load",up);im.addEventListener("error",up)}else up();});
  m.on("popupopen",()=>popOpen=true);m.on("popupclose",()=>{popOpen=false;if(mapPending)drawMap()});
@@ -412,6 +415,7 @@ try{
 }catch(e){document.getElementById("map").outerHTML='<p class="maphint">Karte konnte nicht geladen werden.</p>';}
 drawMap();
 const mh=location.hash.match(/^#h(\d+)$/);if(mh)setTimeout(()=>goHouse(+mh[1]),300);
+const mt=location.hash.match(/^#((?:fl|car)-\d+)$/);if(mt)setTimeout(()=>{const e=document.getElementById(mt[1]);if(e)e.scrollIntoView({behavior:"smooth",block:"center"})},400);
 </script><nav class="bnav" aria-label="Bereiche">
 <a href="#top" data-s="top"><span>🏡</span>Häuser</a>
 <a href="#flug" data-s="flug"><span>✈️</span>Flüge</a>
