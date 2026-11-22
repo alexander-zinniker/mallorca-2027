@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="de-CH"><head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mallorca Ferienhaus 2027</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{--bg:#f6f3ee;--card:#fff;--ink:#1f2a33;--mute:#62707c;--acc:#0e6e8c;--ok:#2e7d4f;--warn:#b36b00;--line:#e4ded5}
+@media (prefers-color-scheme:dark){:root{--bg:#141a1f;--card:#1e262d;--ink:#e9eef2;--mute:#9aa8b3;--acc:#5cc0de;--ok:#6fcf97;--warn:#f2b45a;--line:#2e3943}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,system-ui,Segoe UI,Roboto,sans-serif}
+header{padding:24px 16px 8px;max-width:960px;margin:auto}h1{margin:0 0 4px;font-size:1.6rem}
+.sub{color:var(--mute);margin:0}
+.hello{font-size:clamp(1.5rem,5vw,2.3rem);font-weight:700;margin:6px 0 10px;line-height:1.2}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.facts span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.9rem}
+.note{background:var(--card);border-left:4px solid var(--warn);padding:10px 14px;border-radius:8px;font-size:.92rem;margin:8px 0}
+.bar{position:sticky;top:0;background:var(--bg);padding:10px 16px;z-index:2;border-bottom:1px solid var(--line)}
+.bar .in{max-width:960px;margin:auto;display:flex;gap:8px;flex-wrap:wrap}
+select,button{font:inherit;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+main{max-width:960px;margin:auto;padding:12px 16px 40px;display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.c{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.c img,.ph{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:var(--line)}
+.ph{display:flex;align-items:center;justify-content:center;color:var(--mute)}
+.b{padding:12px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.t{display:flex;justify-content:space-between;gap:8px;align-items:start}.t h2{font-size:1.1rem;margin:0}
+.fav{border:none;background:none;font-size:1.4rem;padding:0;cursor:pointer;line-height:1}
+.loc{color:var(--mute);font-size:.9rem}
+.price{font-size:1.25rem;font-weight:700}.pp{color:var(--mute);font-size:.88rem;font-weight:400}
+.meter{height:6px;background:var(--line);border-radius:4px;overflow:hidden}.meter i{display:block;height:100%;background:var(--ok)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}.tags span{font-size:.8rem;border:1px solid var(--line);border-radius:6px;padding:2px 8px}
+.go{margin-top:auto;display:block;text-align:center;background:var(--acc);color:#fff;text-decoration:none;padding:10px;border-radius:8px;font-weight:600}
+@media (prefers-color-scheme:dark){.go{color:#0b1a20}}
+footer{max-width:960px;margin:auto;padding:0 16px 32px;color:var(--mute);font-size:.85rem}
+#map{height:360px;border-radius:12px;border:1px solid var(--line);margin:14px 0 4px;z-index:0}
+.maphint{color:var(--mute);font-size:.85rem;margin:0 0 8px}
+.num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font-weight:700;font-size:.85rem;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4);flex:none}
+.num.top{background:var(--ok)}.num.over{background:var(--warn)}
+#legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px;margin:0 0 14px}
+#legend a{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--card);border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none;line-height:1.25}
+#legend small{color:var(--mute)}#legend .lp{margin-left:auto;font-weight:700;white-space:nowrap}
+.go.wa{background:#1f8f4e;margin-top:8px}
+@media (prefers-color-scheme:dark){.go.wa{background:#4cc47f}}
+.vote{background:var(--card);border:1px solid var(--line);border-left:4px solid #e0a800;border-radius:12px;padding:12px 14px;margin:10px 0;transition:box-shadow .3s}
+.vote.ask{box-shadow:0 0 0 3px #e0a800}
+.vote h2{margin:0 0 6px;font-size:1.15rem}.who{margin:0 0 6px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pp-b{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:6px 12px;font:inherit;cursor:pointer}
+.pp-b.on{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:700}
+.vh{color:var(--mute);font-size:.85rem;margin:4px 0}
+#rank ol{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}
+#rank a{display:flex;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none;line-height:1.25}
+#rank small{color:var(--mute)}.rs{white-space:nowrap}.rw{margin-left:auto;text-align:right;font-size:.85rem;color:var(--mute)}
+.stars{font-size:.9rem;font-weight:600;color:#9a7400;margin:2px 0 4px}
+@media (prefers-color-scheme:dark){.stars{color:#e0b84a}}
+.ac{font-size:.9rem;margin:4px 0;padding:4px 8px;border-radius:8px;background:#e7f3fb;color:#0b5577}
+.ac-gebuehr{background:#fff3e0;color:#8a4b00}.ac-unklar{background:#f1f1f1;color:#555}
+@media (prefers-color-scheme:dark){.ac{background:#12303d;color:#9fd3ee}.ac-gebuehr{background:#3a2a10;color:#f3c07a}.ac-unklar{background:#2a2a2a;color:#bbb}}
+.new{display:inline-block;background:#d9480f;color:#fff;font-size:.7rem;font-weight:700;padding:2px 6px;border-radius:6px;vertical-align:middle;letter-spacing:.02em}
+.pin{background:var(--acc);color:#fff;border:0;border-radius:6px;padding:2px 6px;font-weight:700;font-size:.78rem;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.pin.top{background:var(--ok)}.pin.over{background:var(--warn)}
+.leaflet-tooltip.pin:before{display:none}
+.pop b{font-size:1rem}.pop a{display:inline-block;margin-top:6px;margin-right:10px;font-weight:600}
+article.c{scroll-margin-top:120px}
+article.c.hi{outline:3px solid var(--acc);outline-offset:2px}
+</style></head><body>
+<header>
+<h1>🏡 Ferienhaus Mallorca 2027</h1>
+<p class="hello">Hallo Ferienfreunde</p>
+<p class="sub">Moderne und gepflegte Häuser auf ganz Mallorca · 19.6.–3.7.2027 · 4 Personen · mit Pool</p>
+<div class="facts"><span>📅 19. Juni – 3. Juli 2027 (14 Nächte)</span><span>💰 Budget CHF 7'000–10'000</span><span id="cnt"></span></div>
+<div id="map" role="region" aria-label="Karte von Mallorca mit allen Häusern"></div>
+<p class="maphint">🗺️ Tippt auf eine Nummer in der Karte oder auf ein Haus in der Liste, um direkt hinzuspringen. Grün = Top 3, Orange = über Budget.</p>
+<div id="legend"></div>
+<div class="note"><b>Gut zu wissen:</b> Ende Juni ist Hochsaison, mit 28–32 °C. Achtet auf <b>Klimaanlage</b> in den Schlafzimmern. Gute Häuser sind früh weg, also lieber bald entscheiden. Preise sind Momentaufnahmen vom 21.11.2026 und können sich ändern.</div>
+<div class="note" style="border-color:var(--ok)"><b>Ehrliches Fazit:</b> Neu dabei sind 10 Häuser mit etwas weniger Luxus: gepflegte, renovierte Fincas und Villen mit Pool, freistehend, im Preisrahmen. Sie sind mit <span class="new">Neu</span> markiert. Am modernsten davon sind <b>Integra</b> (Sencelles) und <b>Can Marcos</b> (Porreres, Neubau mit Rundumblick). Nahe Palma liegen <b>Santa Ponça</b>, <b>Finca es Born</b> und <b>Casa Na Servera</b>. Bisherige Top 3 bleiben: Galeria Verde, Felicidad, Ibel. Preise in CHF umgerechnet (1 EUR ≈ 0.93 CHF), bitte beim Anbieter bestätigen.</div>
+<section class="vote" id="vote">
+<h2>⭐ Sterne der Gruppe</h2>
+<p class="who">Wer bist du? <span id="people"></span></p>
+<p class="vh" id="vh"></p>
+<div id="rank"></div>
+</section>
+</header>
+<div class="bar"><div class="in">
+<select id="reg"><option value="">Alle Orte</option></select>
+<select id="nw"><option value="">Alle Häuser</option><option value="neu">Nur neue Häuser</option><option value="alt">Nur bisherige Häuser</option></select>
+<select id="acf"><option value="">Klimaanlage: alle</option><option value="ja">Nur mit Klimaanlage (inklusive)</option><option value="any">Mit Klimaanlage (auch gegen Gebühr)</option></select>
+<select id="sort"><option value="e">Empfehlung zuerst</option><option value="p">Günstigste zuerst</option><option value="k">Am nächsten bei Palma</option><option value="s">Beste Bewertung zuerst</option><option value="z">Meiste Schlafzimmer</option></select>
+<button id="fo">⭐ Nur meine Sterne</button>
+</div></div>
+<main id="list"></main>
+<footer>Quellen: Fincallorca, Booking.com, Holidu und Lifestylefincas. Aussortiert wurden Häuser, die rein rustikal sind, direkt an Nachbarhäuser grenzen (unter 20 m) oder veraltet wirken. Preise für das ganze Haus, 14 Nächte, in CHF. Vor dem Buchen bitte Betten, Klimaanlage und Stornobedingungen beim Anbieter prüfen.</footer>
+<script>
+const D=[{"name": "Galeria Verde", "price": 8986, "ort": "Betlem (Artà), Nordosten", "km": 75, "sz": 2, "bz": 2, "top": 1, "view": "Berge & Bucht", "hl": ["Avantgardistisch, modern", "2 Bäder", "Bewertung 5/5", "Im Budget"], "img": "https://image.novasol.com/pic/600/emf/emf783_pool_01.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/galeria-verde-betlem-emf783?adult=4&child=0&start=19-06-2027&nights=14", "score": 5, "n": 0, "src": "Fincallorca", "eur": "EUR 9'662 für 19.6.–3.7.", "lat": 39.7235, "lng": 3.3205, "id": "galeria-verde", "ac": "ja", "act": "Schlafzimmer, Wohnbereich und Studio"}, {"name": "Felicidad", "price": 10194, "ort": "Sa Font de Sa Cala (Capdepera), Osten", "km": 80, "sz": 5, "bz": 4, "top": 2, "view": "Meer (100 m)", "hl": ["Design-Einrichtung", "Dachterrasse & Poolbar", "4 Bäder", "Gratis Storno bis 30 Tage", "Rund 2 % über Budget"], "img": "https://image.novasol.com/pic/600/emf/emf679_outdoor_01.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/felicidad-sa-font-de-sa-cala-emf679?adult=4&child=0&start=19-06-2027&nights=14", "score": 4, "n": 0, "src": "Fincallorca", "eur": "EUR 10'961 für 19.6.–3.7.", "lat": 39.6805, "lng": 3.452, "id": "felicidad", "ac": "ja", "act": "Fast alle Zimmer klimatisiert"}, {"name": "Ibel Son Serra de Marina", "price": 7892, "ort": "Son Serra de Marina, Nordküste", "km": 60, "sz": 3, "bz": 2, "top": 3, "view": "Land & Meer in der Nähe", "hl": ["Modern, puristisch", "Weisse Design-Villa", "2 Bäder", "Im Budget"], "img": "https://image.novasol.com/pic/600/emf/emf880_pool_01.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/ibel-son-serra-de-marina-son-serra-de-marina-emf880?adult=4&child=0&start=19-06-2027&nights=14", "score": null, "n": 0, "src": "Fincallorca", "eur": "EUR 8'486 für 19.6.–3.7.", "lat": 39.725, "lng": 3.23, "id": "ibel-son-serra-de-marina", "ac": "ja", "act": "Alle Schlafzimmer und Wohnraum"}, {"name": "Sa Carbona", "price": 8496, "ort": "Artà, Nordosten", "km": 70, "sz": 3, "bz": 2, "top": null, "view": "Land & Hügel", "hl": ["Steinhaus, innen modern", "Moderne Poolterrasse", "Bewertung 4.5/5"], "img": "https://image.novasol.com/pic/600/emi/emi095_pool_01.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/sa-carbona-arta-emi095?adult=4&child=0&start=19-06-2027&nights=14", "score": 4.5, "n": 0, "src": "Fincallorca", "eur": "EUR 9'136 für 19.6.–3.7.", "lat": 39.694, "lng": 3.35, "id": "sa-carbona", "ac": "gebuehr", "act": "Vorhanden, kostet extra"}, {"name": "Torre de Heretat", "price": 8542, "ort": "Canyamel (Cap Vermell), Osten", "km": 75, "sz": 4, "bz": 3, "top": null, "view": "Meer", "hl": ["Am Hang mit Meerblick", "Elegant-modern", "3 Bäder", "Viel Platz"], "img": "https://image.novasol.com/pic/600/emf/emf730_pool_01.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/torre-de-heretat-canyamel-emf730?adult=4&child=0&start=19-06-2027&nights=14", "score": null, "n": 0, "src": "Fincallorca", "eur": "EUR 9'185 für 19.6.–3.7.", "lat": 39.656, "lng": 3.43, "id": "torre-de-heretat", "ac": "ja", "act": "4 Geräte"}, {"name": "Casa de Sa Tanca", "price": 8698, "ort": "Galilea (Puigpunyent), nahe Palma", "km": 15, "sz": 4, "bz": 4, "top": null, "view": "Berge", "hl": ["Mediterran-gehoben, nicht ganz modern", "Nahe Palma", "4 Bäder", "Bewertung 5/5"], "img": "https://image.novasol.com/pic/600/emi/emi202_pool_01.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/casa-de-sa-tanca-galilea-emi202?adult=4&child=0&start=19-06-2027&nights=14", "score": 5, "n": 0, "src": "Fincallorca", "eur": "EUR 9'353 für 19.6.–3.7.", "lat": 39.613, "lng": 2.526, "id": "casa-de-sa-tanca", "ac": "ja", "act": "Alle Schlafzimmer (4 Geräte)"}, {"name": "Moderne Villa in Palmanyola", "price": 9895, "ort": "Palmanyola (Bunyola)", "km": 10, "sz": 6, "bz": null, "top": null, "view": "Garten & Hügel (Blick nicht beschrieben)", "hl": ["Modern eingerichtet", "Privater Pool 10 × 4,5 m", "Im Budget", "Juni-Preis noch bestätigen"], "img": "https://img.holidu.com/images/8bfe244c-69b0-499e-842f-42684851ad22/t.jpg", "url": "https://www.ferienwohnungen-spanien.de/Bunyola/ferienhauser/luxus", "score": null, "n": 0, "src": "Holidu (Liste Bunyola, «Villa für 10 Personen»)", "eur": "EUR 760 pro Nacht", "lat": 39.635, "lng": 2.65, "id": "moderne-villa-in-palmanyola", "ac": "ja", "act": "Laut Holidu vorhanden"}, {"name": "Casa Miramar", "price": 6445, "ort": "Galilea (Puigpunyent)", "km": 15, "sz": 3, "bz": 3, "top": null, "view": "Meer", "hl": ["Komplett modernisiert", "Meerblick", "Bergdorf", "Kleiner Pool 5 × 3 m", "Etwas unter CHF 7'000"], "img": "https://www.lifestylefincas.com/wp-content/uploads/lifestylefincas-casa-miramar-kirche.jpg", "url": "https://www.lifestylefincas.com/finca/casa-miramar/", "score": null, "n": 0, "src": "Lifestylefincas", "eur": "EUR 465–495 pro Nacht, Kurtaxe extra", "lat": 39.6175, "lng": 2.517, "id": "casa-miramar", "ac": "ja", "act": "In den Zimmern, dazu Fussbodenheizung"}, {"id": "integra", "name": "Integra", "price": 8054, "ort": "Sencelles, Inselmitte", "km": 30, "sz": 2, "bz": 2, "top": null, "view": "Hügel im Norden", "hl": ["Moderner Bungalow", "Alles auf einer Ebene", "Renoviert 2015", "Gratis Storno bis 30 Tage"], "img": "https://image.novasol.com/pic/600/emf/emf637_pool_01.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/integra-sencelles-emf637?adult=4&child=0&start=19-06-2027&nights=14", "score": null, "n": 0, "src": "Fincallorca", "eur": "EUR 8'660 für 19.6.–3.7.", "lat": 39.645, "lng": 2.898, "neu": true, "ac": "ja", "act": "Vorhanden"}, {"id": "can-marcos", "name": "Can Marcos", "price": 9285, "ort": "Porreres, Inselmitte", "km": 40, "sz": 3, "bz": 3, "top": null, "view": "360° über die Ebene bis zur Tramuntana", "hl": ["Neubau 2016, renoviert 2024", "Hanglage, sehr ruhig", "12-m-Pool", "Moderne Küche"], "img": "https://image.novasol.com/pic/600/emf/emf617_pool_03.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/can-marcos-porreres-emf617?adult=4&child=0&start=19-06-2027&nights=14", "score": null, "n": 0, "src": "Fincallorca", "eur": "EUR 9'984 für 19.6.–3.7.", "lat": 39.535, "lng": 3.0, "neu": true, "ac": "ja", "act": "Warm und kalt"}, {"id": "sa-tanca-porto-cristo", "name": "Sa Tanca", "price": 9413, "ort": "Porto Cristo, Osten", "km": 60, "sz": 4, "bz": 4, "top": null, "view": "Garten & Landschaft", "hl": ["Renoviert 2021", "Bewertung 5/5", "4 Bäder", "Gratis Storno bis 30 Tage"], "img": "https://image.novasol.com/pic/600/emf/emf325_main_01.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/sa-tanca-porto-cristo-emf325?adult=4&child=0&start=19-06-2027&nights=14", "score": 5, "n": 0, "src": "Fincallorca", "eur": "EUR 10'122 für 19.6.–3.7.", "lat": 39.545, "lng": 3.315, "neu": true, "ac": "ja", "act": "Alle 4 Schlafzimmer"}, {"id": "vinroma", "name": "Vinroma", "price": 8943, "ort": "Muro, Norden", "km": 45, "sz": 3, "bz": 2, "top": null, "view": "Felder & Berge", "hl": ["Bewertung 5/5", "Nachbar 250 m entfernt", "Gepflegter Garten", "Gratis Storno bis 30 Tage"], "img": "https://image.novasol.com/pic/600/emf/emf922_pool_01.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/vinroma-muro-emf922?adult=4&child=0&start=19-06-2027&nights=14", "score": 5, "n": 0, "src": "Fincallorca", "eur": "EUR 9'616 für 19.6.–3.7.", "lat": 39.735, "lng": 3.055, "neu": true, "ac": "ja", "act": "Warm und kalt"}, {"id": "can-xesquet", "name": "Can Xesquet", "price": 8574, "ort": "Ses Salines, Süden", "km": 50, "sz": 3, "bz": 2, "top": null, "view": "Landschaft", "hl": ["Naturstein trifft schicke Terrassen", "Renoviert 2015", "Strände im Süden nah"], "img": "https://image.novasol.com/pic/600/emf/emf509_pool_01.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/can-xesquet-ses-salines-emf509?adult=4&child=0&start=19-06-2027&nights=14", "score": null, "n": 0, "src": "Fincallorca", "eur": "EUR 9'219 für 19.6.–3.7.", "lat": 39.345, "lng": 3.05, "neu": true, "ac": "ja", "act": "Vorhanden"}, {"id": "es-sequer", "name": "Es Sequer", "price": 7537, "ort": "Felanitx, Südosten", "km": 50, "sz": 3, "bz": 2, "top": null, "view": "Landschaft", "hl": ["Renoviert 2023", "Bewertung 5/5", "60-m²-Pool", "Günstigstes neues Haus"], "img": "https://image.novasol.com/pic/600/emf/emf202_pool_02.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/es-sequer-felanitx-emf202?adult=4&child=0&start=19-06-2027&nights=14", "score": 5, "n": 0, "src": "Fincallorca", "eur": "EUR 8'104 für 19.6.–3.7.", "lat": 39.47, "lng": 3.14, "neu": true, "ac": "gebuehr", "act": "Voll klimatisiert, kostet extra"}, {"id": "santa-ponsa", "name": "Ferienhaus Santa Ponça", "price": 9652, "ort": "Santa Ponça, Südwesten", "km": 20, "sz": 3, "bz": 2, "top": null, "view": "Garten, Meer 300 m", "hl": ["Renoviert 2025", "Bewertung 5/5", "Nahe Palma", "Nachbarn 28 m entfernt"], "img": "https://image.novasol.com/pic/600/emi/emi599_main_01.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/santa-pona-emi599?adult=4&child=0&start=19-06-2027&nights=14", "score": 5, "n": 0, "src": "Fincallorca", "eur": "EUR 10'379 für 19.6.–3.7.", "lat": 39.51, "lng": 2.475, "neu": true, "ac": "ja", "act": "Warm und kalt"}, {"id": "can-bou", "name": "Can Bou", "price": 9825, "ort": "Ses Salines, Süden", "km": 50, "sz": 4, "bz": 3, "top": null, "view": "Erhöhte Lage, Landschaft", "hl": ["Bewertung 5/5", "Grosser Pool 77 m²", "Nahe Colònia de Sant Jordi", "Knapp unter Budget"], "img": "https://image.novasol.com/pic/600/emf/emf270_pool_01.jpg", "url": "https://www.fincallorca.de/ferienhaeuser/can-bou-ses-salines-emf270?adult=4&child=0&start=19-06-2027&nights=14", "score": 5, "n": 0, "src": "Fincallorca", "eur": "EUR 10'565 für 19.6.–3.7.", "lat": 39.335, "lng": 3.01, "neu": true, "ac": "ja", "act": "Warm und kalt"}, {"name": "Finca es Born", "price": 7436, "ort": "Esporles", "km": 14, "sz": 3, "bz": 2, "hl": ["Rundum-Panoramablick", "8.5 bei 30 Bewertungen"], "top": null, "view": "Panorama", "img": "https://q-xx.bstatic.com/xdata/images/hotel/max500/612171518.jpg?k=4faa5d23a0faa28926cc1adaadd76da52c723c52ae5b953b6329b51d4ecebaeb&o=&a=8132308", "url": "https://www.booking.com/hotel/es/finca-con-inmejorables-en-mallorca.html?aid=8132308&label=mcp_rid-f3b5e53aeaa91726&checkin=2027-06-19&checkout=2027-07-03&group_adults=4&no_rooms=1&selected_currency=CHF", "score": 8.5, "n": 30, "src": "Booking.com", "id": "finca-es-born", "lat": 39.665, "lng": 2.58, "neu": true, "eur": "laut Booking.com, Stand 21.11.2026", "ac": "unklar", "act": "Auf Booking nicht eindeutig, bitte nachfragen"}, {"name": "Casa Na Servera", "price": 9133, "ort": "Esporles", "km": 13, "sz": 4, "bz": 2, "hl": ["Pool mit Blick", "4 Schlafzimmer", "Knapp im Budget"], "top": null, "view": "Berge", "img": "https://q-xx.bstatic.com/xdata/images/hotel/max500/501061561.jpg?k=45ee77458bbca6d991b58794211f8ca3bb90c17bff594d2661b690d4c1b66a58&o=&a=8132308", "url": "https://www.booking.com/hotel/es/preciosa-casa-familiar-cerca-esporlas-na-servera.html?aid=8132308&label=mcp_rid-f3b5e53aeaa91726&checkin=2027-06-19&checkout=2027-07-03&group_adults=4&no_rooms=1&selected_currency=CHF", "score": 9, "n": 3, "src": "Booking.com", "id": "casa-na-servera", "lat": 39.656, "lng": 2.566, "neu": true, "eur": "laut Booking.com, Stand 21.11.2026", "ac": "ja", "act": "Alle 4 Schlafzimmer"}];const B=10000;
+// Gemeinsamer Speicher (Firebase Realtime Database). Leer = Sterne nur auf diesem Gerät.
+const DB="https://mallorca-2027-96c84-default-rtdb.europe-west1.firebasedatabase.app";
+const PEOPLE=["Ilona","Nicole","Stefan","Alex"];
+let me="";try{me=localStorage.getItem("me")||""}catch(e){}
+let V={};
+if(!DB){try{V=JSON.parse(localStorage.getItem("votes")||"{}")}catch(e){}}
+const mine=x=>!!(me&&V[me]&&V[me][x.id]);
+const who=x=>PEOPLE.filter(p=>V[p]&&V[p][x.id]);
+async function load(){if(!DB)return;try{const r=await fetch(DB+"/votes.json",{cache:"no-store"});if(r.ok){V=(await r.json())||{};setStatus("");draw()}else setStatus("Sterne konnten nicht geladen werden.")}catch(e){setStatus("Keine Verbindung. Sterne werden nicht aktualisiert.")}}
+function setStatus(t){const el=document.getElementById("vh");el.textContent=t||(DB?"Die Liste aktualisiert sich von selbst, wenn jemand einen Stern setzt oder entfernt.":"Hinweis: Die gemeinsame Zählung ist noch nicht eingerichtet. Sterne werden vorerst nur auf diesem Gerät gespeichert.")}
+async function toggle(id){
+ if(!me){const v=document.getElementById("vote");v.scrollIntoView({behavior:"smooth"});v.classList.add("ask");setTimeout(()=>v.classList.remove("ask"),2500);return}
+ V[me]=V[me]||{};const on=!V[me][id];if(on)V[me][id]=true;else delete V[me][id];draw();
+ if(!DB){try{localStorage.setItem("votes",JSON.stringify(V))}catch(e){};return}
+ try{const r=await fetch(`${DB}/votes/${me}/${id}.json`,{method:on?"PUT":"DELETE",body:on?"true":undefined});if(!r.ok)throw 0;load()}
+ catch(e){setStatus("Speichern hat nicht geklappt. Bitte nochmals versuchen.");load()}
+}
+function drawPeople(){document.getElementById("people").innerHTML=PEOPLE.map(p=>`<button class="pp-b${p==me?" on":""}" data-p="${p}">${p}</button>`).join("");
+ document.querySelectorAll(".pp-b").forEach(b=>b.onclick=()=>{me=b.dataset.p;try{localStorage.setItem("me",me)}catch(e){};drawPeople();draw()})}
+function drawRank(){
+ const L=D.map((x,i)=>({x,i,w:who(x)})).filter(o=>o.w.length).sort((a,b)=>b.w.length-a.w.length||(a.x.top||99)-(b.x.top||99));
+ document.getElementById("rank").innerHTML=L.length?`<ol>${L.map(o=>`<li><a href="#h${o.i}" onclick="goHouse(${o.i});return false"><span class="rs">${"⭐".repeat(o.w.length)}</span><span><b>${esc(o.x.name)}</b><br><small>${esc(o.x.ort)} · ${f(o.x.price)}</small></span><span class="rw">${o.w.map(esc).join(", ")}</span></a></li>`).join("")}</ol>`:"<p class=\"vh\">Noch keine Sterne vergeben. Tippt bei einem Haus auf ☆.</p>"}
+let onlyFav=false;
+const reg=document.getElementById("reg");const nw=document.getElementById("nw");const acf=document.getElementById("acf");
+[...new Set(D.map(x=>x.ort))].sort().forEach(r=>{const o=document.createElement("option");o.value=o.textContent=r;reg.appendChild(o)});
+const f=n=>"CHF "+Math.round(n).toLocaleString("de-CH");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const SITE="https://alexander-zinniker.github.io/mallorca-2027/";
+const wa=x=>"https://wa.me/?text="+encodeURIComponent(`🏡 ${x.name}\n📍 ${x.ort}\n💰 ${f(x.price)} für 14 Nächte (19.6.–3.7.2027)\n👉 ${SITE}#h${D.indexOf(x)}`);
+function draw(){
+ let L=D.filter(x=>(!reg.value||x.ort==reg.value)&&(!onlyFav||mine(x))&&(!nw.value||(nw.value=="neu")==!!x.neu)&&(!acf.value||(acf.value=="ja"?x.ac=="ja":x.ac!="unklar")));
+ const s=document.getElementById("sort").value;
+ L.sort((a,b)=>s=="e"?((a.top||99)-(b.top||99))||((b.score||0)*Math.min(b.n,20)-(a.score||0)*Math.min(a.n,20)):s=="k"?a.km-b.km:s=="p"?a.price-b.price:s=="s"?(b.score||0)-(a.score||0):(b.sz||0)-(a.sz||0));
+ document.getElementById("cnt").textContent="🏠 "+L.length+" Häuser";
+ document.getElementById("list").innerHTML=L.map(x=>`<article class="c" id="h${D.indexOf(x)}">
+ ${x.img?`<img src="${esc(x.img)}" alt="${esc(x.name)}" loading="lazy" onerror="this.outerHTML=\x27<div class=ph>Bild nicht verfügbar</div>\x27">`:`<div class="ph">Kein Bild</div>`}
+ <div class="b"><div class="t"><h2>${x.top?`🏆 `:""}${esc(x.name)}${x.neu?` <span class="new">Neu</span>`:""}</h2><button class="fav" data-id="${x.id}" aria-label="Stern setzen oder entfernen">${mine(x)?"⭐":"☆"}</button></div>${who(x).length?`<div class="stars">⭐ ${who(x).length}: ${who(x).map(esc).join(", ")}</div>`:""}
+ <div class="loc">📍 ${esc(x.ort)} · ${x.km} km bis Palma · 👀 Blick: ${esc(x.view)}</div>
+ <div class="price">${f(x.price)} <span class="pp">gesamt · ${f(x.price/2)} pro Paar</span></div>${x.eur?`<div class="loc">Anbieter-Preis: ${esc(x.eur)}</div>`:""}
+ <div class="ac ac-${x.ac}">❄️ Klimaanlage: ${x.ac=="ja"?"Ja":x.ac=="gebuehr"?"Ja, gegen Gebühr":"Unklar"} · ${esc(x.act)}</div>
+ <div class="meter" title="Anteil am Budget"><i style="width:${Math.min(100,x.price/B*100)}%"></i></div>
+ <div class="loc">${Math.round(x.price/B*100)}% vom Budget${x.sz?` · 🛏 ${x.sz} Schlafzimmer`:""}${x.bz?` · 🚿 ${x.bz} Bad`:""}${x.score?` · 👍 ${x.score}/${x.score<=5?5:10}${x.n?` (${x.n})`:""}`:""}</div>
+ <div class="tags">${x.hl.map(h=>`<span>${esc(h)}</span>`).join("")}</div>
+ <a class="go" href="${esc(x.url)}" target="_blank" rel="noopener">Ansehen auf ${esc(x.src)}</a><a class="go wa" href="${wa(x)}" target="_blank" rel="noopener">💬 In WhatsApp teilen</a></div></article>`).join("")||"<p>Keine Häuser gefunden.</p>";
+ document.querySelectorAll(".fav").forEach(b=>b.onclick=()=>toggle(b.dataset.id));
+ drawRank();
+}
+reg.onchange=draw;nw.onchange=draw;acf.onchange=draw;document.getElementById("sort").onchange=draw;
+document.getElementById("fo").onclick=e=>{onlyFav=!onlyFav;e.target.style.borderColor=onlyFav?"var(--acc)":"";draw()};
+drawPeople();setStatus("");draw();load();
+setInterval(()=>{if(!document.hidden)load()},10000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)load()});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+function goHouse(i){reg.value="";nw.value="";acf.value="";onlyFav=false;document.getElementById("fo").style.borderColor="";draw();
+ const el=document.getElementById("h"+i);if(!el)return;el.scrollIntoView({behavior:"smooth",block:"start"});
+ el.classList.add("hi");setTimeout(()=>el.classList.remove("hi"),2500);}
+try{
+ const m=L.map("map",{scrollWheelZoom:false}).setView([39.62,2.95],9);
+ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap"}).addTo(m);
+ L.circleMarker([39.5696,2.6502],{radius:6,color:"#555",fillOpacity:.8}).addTo(m).bindTooltip("Palma",{permanent:true,direction:"bottom"});
+ const pts=[];
+ const ord=D.map((x,i)=>i).sort((a,b)=>(D[a].top||99)-(D[b].top||99)||D[a].price-D[b].price);
+ const leg=[];
+ ord.forEach((i,k)=>{const x=D[i];if(!x.lat)return;pts.push([x.lat,x.lng]);
+  const col=x.price>B?"over":x.top?"top":"";
+  const ic=L.divIcon({className:"",html:`<div class="num ${col}">${k+1}</div>`,iconSize:[26,26],iconAnchor:[13,13]});
+  L.marker([x.lat,x.lng],{icon:ic,title:x.name,zIndexOffset:100-k}).addTo(m)
+   .bindPopup(`<div class="pop"><b>${x.top?"🏆 ":""}${esc(x.name)}</b><br>📍 ${esc(x.ort)}<br>💰 ${f(x.price)} gesamt<br><a href="#h${i}" onclick="goHouse(${i});return false">Zum Haus ↓</a><a href="${esc(x.url)}" target="_blank" rel="noopener">Beim Anbieter ↗</a><br><a href="${wa(x)}" target="_blank" rel="noopener">💬 In WhatsApp teilen</a></div>`);
+  leg.push(`<a href="#h${i}" onclick="goHouse(${i});return false"><span class="num ${col}">${k+1}</span><span><b>${esc(x.name)}</b>${x.neu?` <span class="new">Neu</span>`:""}<br><small>${esc(x.ort)}</small></span><span class="lp">${f(x.price)}</span></a>`);
+ });
+ document.getElementById("legend").innerHTML=leg.join("");
+ if(pts.length)m.fitBounds(pts,{padding:[30,30]});
+}catch(e){document.getElementById("map").outerHTML='<p class="maphint">Karte konnte nicht geladen werden.</p>';}
+const mh=location.hash.match(/^#h(\d+)$/);if(mh)setTimeout(()=>goHouse(+mh[1]),300);
+</script></body></html>
