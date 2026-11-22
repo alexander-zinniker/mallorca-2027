@@ -70,8 +70,14 @@ article.c.hi{outline:3px solid var(--acc);outline-offset:2px}
 .badge{display:inline-block;font-size:.75rem;font-weight:700;padding:2px 7px;border-radius:6px;background:var(--ok);color:#fff;align-self:flex-start}
 .badge.alt{background:var(--mute)}.tc .go{margin-top:8px}.tsum{font-weight:700;font-size:1.05rem;margin:10px 0 0}
 .brand{display:flex;align-items:center;gap:14px}.brand img{width:clamp(76px,22vw,110px);height:auto;flex:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))}
+.pv{background:#d9480f;color:#fff;text-align:center;font-size:.85rem;font-weight:600;padding:6px 10px}
+.tc{scroll-margin-top:16px}.tc.hi{outline:3px solid var(--acc);outline-offset:2px}
+body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:1000;display:flex;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -2px 10px rgba(0,0,0,.08);padding:4px 4px calc(4px + env(safe-area-inset-bottom))}
+.bnav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 2px;border-radius:10px;color:var(--mute);text-decoration:none;font-size:.75rem;font-weight:600}
+.bnav a span{font-size:1.35rem;line-height:1.1}.bnav a.on{color:var(--acc);background:var(--bg)}
 </style></head><body>
-<header>
+<header id="top">
 <div class="brand"><img src="logo.svg" alt="Logo: vier Freunde mit erhobenen Armen vor dem Meer"><div><h1>Ferienhaus Mallorca 2027</h1>
 <p class="hello">Hallo Ferienfreunde</p></div></div>
 <p class="sub">Moderne und gepflegte Häuser auf ganz Mallorca · 19.6.–3.7.2027 · 4 Personen · mit Pool</p>
@@ -100,10 +106,10 @@ article.c.hi{outline:3px solid var(--acc);outline-offset:2px}
 <h2>✈️🚗 Anreise &amp; Mietwagen</h2>
 <p class="sub">Hinflug Samstag 19.6. am Nachmittag ab Zürich, direkt, möglichst mit Swiss. Rückflug Samstag 3.7. am späteren Vormittag oder Mittag. Zwei Mietwagen, einer pro Paar.</p>
 <div class="note"><b>Richtwerte, Stand 22.11.2026:</b> Die Flüge für Juni 2027 sind bereits buchbar. Preise gelten für <b>alle 4 Personen</b>, hin und zurück, <b>ohne aufgegebenes Gepäck</b> (Koffer kosten je nach Tarif extra). Flugpreise ändern sich laufend. Die Knöpfe öffnen die Suche mit euren Daten, gebucht wird erst dort.</div>
-<h3>✈️ Flüge Zürich – Palma</h3>
+<h3 id="flug" style="scroll-margin-top:12px">✈️ Flüge Zürich – Palma</h3>
 <div class="tg" id="flights"></div>
 <p class="vh">Tipp: Direkt bei Swiss buchen lohnt sich oft, weil dort Gepäck und Sitzplätze im Tarif klar sind. <a href="https://www.swiss.com/ch/de" target="_blank" rel="noopener">swiss.com</a> · <a href="https://www.google.com/travel/flights?q=Flights%20from%20ZRH%20to%20PMI%20on%202027-06-19%20through%202027-07-03%20for%204%20adults%20nonstop&amp;hl=de&amp;curr=CHF" target="_blank" rel="noopener">Alle Direktflüge in Google Flüge</a></p>
-<h3>🚗 Mietwagen bei Sixt, Flughafen Palma</h3>
+<h3 id="auto" style="scroll-margin-top:12px">🚗 Mietwagen bei Sixt, Flughafen Palma</h3>
 <p class="sub">Abholung Sa 19.6. um 18:00, Rückgabe Sa 3.7. um 09:00 (Schalter offen 07:00–23:59). 14 Tage, unbegrenzte Kilometer, Automatik.</p>
 <div class="tg" id="cars"></div>
 <div class="note" style="border-color:var(--ok)"><b>Ehrliche Einschätzung:</b> Für 2 Personen mit Gepäck für 2 Wochen ist der <b>BMW 1er</b> gut geeignet: Platz für 3 Koffer, Rückbank frei. Sixt garantiert nur die Wagenklasse, nicht das genaue Modell. Preise sind Grundpreise ohne Zusatzversicherung und ohne Zusatzfahrer.</div>
@@ -158,14 +164,14 @@ function tStars(id){const w=PEOPLE.filter(p=>V[p]&&V[p][id]);return w.length?`<d
 function tFav(id){return `<button class="fav" data-id="${id}" aria-label="Stern setzen oder entfernen">${me&&V[me]&&V[me][id]?"⭐":"☆"}</button>`}
 function drawTravel(){
  const fe=document.getElementById("flights");if(!fe)return;
- fe.innerHTML=FL.map(o=>`<div class="tc${o.rec?" rec":""}">${o.tag?`<span class="badge${o.alt?" alt":""}">${o.tag}</span>`:""}
+ fe.innerHTML=FL.map(o=>`<div class="tc${o.rec?" rec":""}" id="${o.id}">${o.tag?`<span class="badge${o.alt?" alt":""}">${o.tag}</span>`:""}
  <div class="t"><h4>${esc(o.air)}</h4>${tFav(o.id)}</div>${tStars(o.id)}
  <div class="tl"><b>Hin</b> Sa 19.6. · ${o.out[1]} Zürich → ${o.out[2]} Palma · ${o.out[0]}</div>
  <div class="tl"><b>Rück</b> Sa 3.7. · ${o.back[1]} Palma → ${o.back[2]} Zürich · ${o.back[0]}</div>
  <div class="price">ca. ${f(o.price)} <span class="pp">für 4 Personen · ca. ${f(o.price/4)} pro Person</span></div>
  ${o.note?`<div class="loc">${esc(o.note)}</div>`:""}
  <a class="go" href="${o.url}" target="_blank" rel="noopener">Diese Flüge buchen</a></div>`).join("");
- document.getElementById("cars").innerHTML=CARS.map(o=>`<div class="tc${o.rec?" rec":""}">${o.tag?`<span class="badge${o.alt?" alt":""}">${o.tag}</span>`:""}
+ document.getElementById("cars").innerHTML=CARS.map(o=>`<div class="tc${o.rec?" rec":""}" id="${o.id}">${o.tag?`<span class="badge${o.alt?" alt":""}">${o.tag}</span>`:""}
  <div class="t"><h4>${esc(o.name)} <span class="pp">oder ähnlich</span></h4>${tFav(o.id)}</div>${tStars(o.id)}
  <div class="loc">${esc(o.cls)} · Automatik</div>
  <div class="price">ca. ${f(o.price)} <span class="pp">pro Auto · 2 Autos ca. ${f(o.price*2)}</span></div>
@@ -174,6 +180,7 @@ function drawTravel(){
  const fr=FL[0].price,cr=CARS[0].price*2;
  document.getElementById("tsum").textContent=`Grobe Rechnung mit der Empfehlung: Flüge ca. ${f(fr)} + 2 × BMW 1er ca. ${f(cr)} = ca. ${f(fr+cr)} total, also ca. ${f((fr+cr)/2)} pro Paar (zusätzlich zum Haus, ohne Gepäck und Benzin).`;
 }
+function jump(id){const el=document.getElementById(id);if(!el)return;el.scrollIntoView({behavior:"smooth",block:"start"});el.classList.add("hi");setTimeout(()=>el.classList.remove("hi"),2200)}
 function draw(){drawTravel();
  let L=D.filter(x=>(!reg.value||x.ort==reg.value)&&(!onlyFav||mine(x))&&(!nw.value||(nw.value=="neu")==!!x.neu)&&(!acf.value||(acf.value=="ja"?x.ac=="ja":x.ac!="unklar")));
  const s=document.getElementById("sort").value;
@@ -239,4 +246,18 @@ try{
 }catch(e){document.getElementById("map").outerHTML='<p class="maphint">Karte konnte nicht geladen werden.</p>';}
 drawMap();
 const mh=location.hash.match(/^#h(\d+)$/);if(mh)setTimeout(()=>goHouse(+mh[1]),300);
-</script></body></html>
+</script><nav class="bnav" aria-label="Bereiche">
+<a href="#top" data-s="top"><span>🏡</span>Häuser</a>
+<a href="#flug" data-s="flug"><span>✈️</span>Flüge</a>
+<a href="#auto" data-s="auto"><span>🚗</span>Autos</a>
+<a href="#vote" data-s="vote"><span>⭐</span>Rangliste</a>
+</nav>
+<script>(function(){const L=[...document.querySelectorAll(".bnav a")];
+L.forEach(a=>a.onclick=e=>{e.preventDefault();const id=a.dataset.s;if(id=="top")window.scrollTo({top:0,behavior:"smooth"});else document.getElementById(id).scrollIntoView({behavior:"smooth",block:"start"})});
+function act(){const y=window.scrollY+window.innerHeight*0.35;const pos=k=>document.getElementById(k).getBoundingClientRect().top+window.scrollY;
+ let cur="top";const v=pos("vote"),vb=v+document.getElementById("vote").offsetHeight;
+ if(y>=pos("auto"))cur="auto";else if(y>=pos("flug"))cur="flug";else if(y>=v&&y<vb)cur="vote";
+ L.forEach(a=>a.classList.toggle("on",a.dataset.s==cur))}
+addEventListener("scroll",act,{passive:true});act()})();
+</script>
+</body></html>
