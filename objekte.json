@@ -11,20 +11,21 @@
   "hl": [
    "Avantgardistisch, modern",
    "2 Bäder",
-   "Bewertung 5/5",
    "Im Budget"
   ],
   "img": "https://image.novasol.com/pic/600/emf/emf783_pool_01.jpg",
   "url": "https://www.fincallorca.de/ferienhaeuser/galeria-verde-betlem-emf783?adult=4&child=0&start=19-06-2027&nights=14",
   "score": 5,
-  "n": 0,
+  "n": 2,
   "src": "Fincallorca",
   "eur": "EUR 9'662 für 19.6.–3.7.",
   "lat": 39.7235,
   "lng": 3.3205,
   "id": "galeria-verde",
   "ac": "ja",
-  "act": "Schlafzimmer, Wohnbereich und Studio"
+  "act": "Schlafzimmer, Wohnbereich und Studio",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "name": "Felicidad",
@@ -45,14 +46,16 @@
   "img": "https://image.novasol.com/pic/600/emf/emf679_outdoor_01.jpg",
   "url": "https://www.fincallorca.de/ferienhaeuser/felicidad-sa-font-de-sa-cala-emf679?adult=4&child=0&start=19-06-2027&nights=14",
   "score": 4,
-  "n": 0,
+  "n": 1,
   "src": "Fincallorca",
   "eur": "EUR 10'961 für 19.6.–3.7.",
   "lat": 39.6805,
   "lng": 3.452,
   "id": "felicidad",
   "ac": "ja",
-  "act": "Fast alle Zimmer klimatisiert"
+  "act": "Fast alle Zimmer klimatisiert",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "name": "Ibel Son Serra de Marina",
@@ -71,15 +74,17 @@
   ],
   "img": "https://image.novasol.com/pic/600/emf/emf880_pool_01.jpg",
   "url": "https://www.fincallorca.de/ferienhaeuser/ibel-son-serra-de-marina-son-serra-de-marina-emf880?adult=4&child=0&start=19-06-2027&nights=14",
-  "score": null,
-  "n": 0,
+  "score": 5,
+  "n": 4,
   "src": "Fincallorca",
   "eur": "EUR 8'486 für 19.6.–3.7.",
   "lat": 39.725,
   "lng": 3.23,
   "id": "ibel-son-serra-de-marina",
   "ac": "ja",
-  "act": "Alle Schlafzimmer und Wohnraum"
+  "act": "Alle Schlafzimmer und Wohnraum",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "name": "Sa Carbona",
@@ -92,20 +97,21 @@
   "view": "Land & Hügel",
   "hl": [
    "Steinhaus, innen modern",
-   "Moderne Poolterrasse",
-   "Bewertung 4.5/5"
+   "Moderne Poolterrasse"
   ],
   "img": "https://image.novasol.com/pic/600/emi/emi095_pool_01.jpg",
   "url": "https://www.fincallorca.de/ferienhaeuser/sa-carbona-arta-emi095?adult=4&child=0&start=19-06-2027&nights=14",
   "score": 4.5,
-  "n": 0,
+  "n": 4,
   "src": "Fincallorca",
   "eur": "EUR 9'136 für 19.6.–3.7.",
   "lat": 39.694,
   "lng": 3.35,
   "id": "sa-carbona",
   "ac": "gebuehr",
-  "act": "Vorhanden, kostet extra"
+  "act": "Vorhanden, kostet extra",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "name": "Torre de Heretat",
@@ -132,7 +138,9 @@
   "lng": 3.43,
   "id": "torre-de-heretat",
   "ac": "ja",
-  "act": "4 Geräte"
+  "act": "4 Geräte",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "name": "Casa de Sa Tanca",
@@ -146,20 +154,21 @@
   "hl": [
    "Mediterran-gehoben, nicht ganz modern",
    "Nahe Palma",
-   "4 Bäder",
-   "Bewertung 5/5"
+   "4 Bäder"
   ],
   "img": "https://image.novasol.com/pic/600/emi/emi202_pool_01.jpg",
   "url": "https://www.fincallorca.de/ferienhaeuser/casa-de-sa-tanca-galilea-emi202?adult=4&child=0&start=19-06-2027&nights=14",
   "score": 5,
-  "n": 0,
+  "n": 2,
   "src": "Fincallorca",
   "eur": "EUR 9'353 für 19.6.–3.7.",
   "lat": 39.613,
   "lng": 2.526,
   "id": "casa-de-sa-tanca",
   "ac": "ja",
-  "act": "Alle Schlafzimmer (4 Geräte)"
+  "act": "Alle Schlafzimmer (4 Geräte)",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "name": "Moderne Villa in Palmanyola",
@@ -178,15 +187,17 @@
   ],
   "img": "https://img.holidu.com/images/8bfe244c-69b0-499e-842f-42684851ad22/t.jpg",
   "url": "https://www.ferienwohnungen-spanien.de/Bunyola/ferienhauser/luxus",
-  "score": null,
-  "n": 0,
+  "score": 9.4,
+  "n": 18,
   "src": "Holidu (Liste Bunyola, «Villa für 10 Personen»)",
   "eur": "EUR 760 pro Nacht",
   "lat": 39.635,
   "lng": 2.65,
   "id": "moderne-villa-in-palmanyola",
   "ac": "ja",
-  "act": "Laut Holidu vorhanden"
+  "act": "Laut Holidu vorhanden",
+  "max": 10,
+  "rsrc": "Holidu"
  },
  {
   "name": "Casa Miramar",
@@ -214,7 +225,9 @@
   "lng": 2.517,
   "id": "casa-miramar",
   "ac": "ja",
-  "act": "In den Zimmern, dazu Fussbodenheizung"
+  "act": "In den Zimmern, dazu Fussbodenheizung",
+  "max": 5,
+  "rsrc": "Lifestylefincas"
  },
  {
   "id": "integra",
@@ -242,7 +255,9 @@
   "lng": 2.898,
   "neu": true,
   "ac": "ja",
-  "act": "Vorhanden"
+  "act": "Vorhanden",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "id": "can-marcos",
@@ -270,7 +285,9 @@
   "lng": 3.0,
   "neu": true,
   "ac": "ja",
-  "act": "Warm und kalt"
+  "act": "Warm und kalt",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "id": "sa-tanca-porto-cristo",
@@ -284,21 +301,22 @@
   "view": "Garten & Landschaft",
   "hl": [
    "Renoviert 2021",
-   "Bewertung 5/5",
    "4 Bäder",
    "Gratis Storno bis 30 Tage"
   ],
   "img": "https://image.novasol.com/pic/600/emf/emf325_main_01.jpg",
   "url": "https://www.fincallorca.de/ferienhaeuser/sa-tanca-porto-cristo-emf325?adult=4&child=0&start=19-06-2027&nights=14",
   "score": 5,
-  "n": 0,
+  "n": 2,
   "src": "Fincallorca",
   "eur": "EUR 10'122 für 19.6.–3.7.",
   "lat": 39.545,
   "lng": 3.315,
   "neu": true,
   "ac": "ja",
-  "act": "Alle 4 Schlafzimmer"
+  "act": "Alle 4 Schlafzimmer",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "id": "vinroma",
@@ -311,7 +329,6 @@
   "top": null,
   "view": "Felder & Berge",
   "hl": [
-   "Bewertung 5/5",
    "Nachbar 250 m entfernt",
    "Gepflegter Garten",
    "Gratis Storno bis 30 Tage"
@@ -319,14 +336,16 @@
   "img": "https://image.novasol.com/pic/600/emf/emf922_pool_01.jpg",
   "url": "https://www.fincallorca.de/ferienhaeuser/vinroma-muro-emf922?adult=4&child=0&start=19-06-2027&nights=14",
   "score": 5,
-  "n": 0,
+  "n": 1,
   "src": "Fincallorca",
   "eur": "EUR 9'616 für 19.6.–3.7.",
   "lat": 39.735,
   "lng": 3.055,
   "neu": true,
   "ac": "ja",
-  "act": "Warm und kalt"
+  "act": "Warm und kalt",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "id": "can-xesquet",
@@ -353,7 +372,9 @@
   "lng": 3.05,
   "neu": true,
   "ac": "ja",
-  "act": "Vorhanden"
+  "act": "Vorhanden",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "id": "es-sequer",
@@ -367,21 +388,22 @@
   "view": "Landschaft",
   "hl": [
    "Renoviert 2023",
-   "Bewertung 5/5",
    "60-m²-Pool",
    "Günstigstes neues Haus"
   ],
   "img": "https://image.novasol.com/pic/600/emf/emf202_pool_02.jpg",
   "url": "https://www.fincallorca.de/ferienhaeuser/es-sequer-felanitx-emf202?adult=4&child=0&start=19-06-2027&nights=14",
   "score": 5,
-  "n": 0,
+  "n": 3,
   "src": "Fincallorca",
   "eur": "EUR 8'104 für 19.6.–3.7.",
   "lat": 39.47,
   "lng": 3.14,
   "neu": true,
   "ac": "gebuehr",
-  "act": "Voll klimatisiert, kostet extra"
+  "act": "Voll klimatisiert, kostet extra",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "id": "santa-ponsa",
@@ -395,21 +417,22 @@
   "view": "Garten, Meer 300 m",
   "hl": [
    "Renoviert 2025",
-   "Bewertung 5/5",
    "Nahe Palma",
    "Nachbarn 28 m entfernt"
   ],
   "img": "https://image.novasol.com/pic/600/emi/emi599_main_01.jpg",
   "url": "https://www.fincallorca.de/ferienhaeuser/santa-pona-emi599?adult=4&child=0&start=19-06-2027&nights=14",
   "score": 5,
-  "n": 0,
+  "n": 4,
   "src": "Fincallorca",
   "eur": "EUR 10'379 für 19.6.–3.7.",
   "lat": 39.51,
   "lng": 2.475,
   "neu": true,
   "ac": "ja",
-  "act": "Warm und kalt"
+  "act": "Warm und kalt",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "id": "can-bou",
@@ -422,7 +445,6 @@
   "top": null,
   "view": "Erhöhte Lage, Landschaft",
   "hl": [
-   "Bewertung 5/5",
    "Grosser Pool 77 m²",
    "Nahe Colònia de Sant Jordi",
    "Knapp unter Budget"
@@ -430,14 +452,16 @@
   "img": "https://image.novasol.com/pic/600/emf/emf270_pool_01.jpg",
   "url": "https://www.fincallorca.de/ferienhaeuser/can-bou-ses-salines-emf270?adult=4&child=0&start=19-06-2027&nights=14",
   "score": 5,
-  "n": 0,
+  "n": 2,
   "src": "Fincallorca",
   "eur": "EUR 10'565 für 19.6.–3.7.",
   "lat": 39.335,
   "lng": 3.01,
   "neu": true,
   "ac": "ja",
-  "act": "Warm und kalt"
+  "act": "Warm und kalt",
+  "max": 5,
+  "rsrc": "Fincallorca"
  },
  {
   "name": "Finca es Born",
@@ -447,8 +471,7 @@
   "sz": 3,
   "bz": 2,
   "hl": [
-   "Rundum-Panoramablick",
-   "8.5 bei 30 Bewertungen"
+   "Rundum-Panoramablick"
   ],
   "top": null,
   "view": "Panorama",
@@ -463,7 +486,9 @@
   "neu": true,
   "eur": "laut Booking.com, Stand 21.11.2026",
   "ac": "unklar",
-  "act": "Auf Booking nicht eindeutig, bitte nachfragen"
+  "act": "Auf Booking nicht eindeutig, bitte nachfragen",
+  "max": 10,
+  "rsrc": "Booking.com"
  },
  {
   "name": "Casa Na Servera",
@@ -490,6 +515,68 @@
   "neu": true,
   "eur": "laut Booking.com, Stand 21.11.2026",
   "ac": "ja",
-  "act": "Alle 4 Schlafzimmer"
+  "act": "Alle 4 Schlafzimmer",
+  "max": 10,
+  "rsrc": "Booking.com"
+ },
+ {
+  "id": "es-rafal",
+  "name": "Es Rafal",
+  "price": 8659,
+  "ort": "Calonge (Santanyí), Südosten",
+  "km": 55,
+  "sz": 4,
+  "bz": 4,
+  "top": null,
+  "view": "Panorama-Terrasse über die Landschaft",
+  "hl": [
+   "Renoviert 2024",
+   "4 Bäder",
+   "Strand 3 km",
+   "Nachbar nur 10 m entfernt"
+  ],
+  "img": "https://image.novasol.com/pic/600/emf/emf906_pool_01.jpg",
+  "url": "https://www.fincallorca.de/ferienhaeuser/es-rafal-calonge-calonge-emf906?adult=4&child=0&start=19-06-2027&nights=14",
+  "src": "Fincallorca",
+  "eur": "EUR 9'311 für 19.6.–3.7.",
+  "lat": 39.385,
+  "lng": 3.205,
+  "neu": true,
+  "ac": "ja",
+  "act": "Warm und kalt, Schlafzimmer klimatisiert",
+  "score": 5,
+  "max": 5,
+  "n": 1,
+  "rsrc": "Fincallorca"
+ },
+ {
+  "id": "sineu",
+  "name": "Ferienhaus Sineu",
+  "price": 6268,
+  "ort": "Sineu, Inselmitte",
+  "km": 40,
+  "sz": 3,
+  "bz": 3,
+  "top": null,
+  "view": "Felder & Landschaft, 14'000 m² Grundstück",
+  "hl": [
+   "Neubau 2025, modernes Design",
+   "Fussbodenheizung",
+   "Nachbar 77 m entfernt"
+  ],
+  "img": "https://image.novasol.com/pic/600/emi/emi638_pool_04.jpg",
+  "url": "https://www.fincallorca.de/ferienhaeuser/sineu-emi638?adult=4&child=0&start=16-06-2027&nights=14",
+  "src": "Fincallorca",
+  "eur": "EUR 6'740 für 16.6.–30.6. (14 Nächte). 19.6.–3.7. ist nicht buchbar.",
+  "lat": 39.655,
+  "lng": 3.075,
+  "neu": true,
+  "ac": "ja",
+  "act": "Vorhanden, dazu Fussbodenheizung",
+  "warn": "Für 19.6.–3.7. nicht frei. Frei wäre 16.6.–30.6.",
+  "score": 5,
+  "max": 5,
+  "n": 6,
+  "rsrc": "Fincallorca"
  }
 ]
