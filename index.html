@@ -58,7 +58,7 @@ footer{max-width:960px;margin:auto;padding:0 16px 32px;color:var(--mute);font-si
 .pin{background:var(--acc);color:#fff;border:0;border-radius:6px;padding:2px 6px;font-weight:700;font-size:.78rem;box-shadow:0 1px 3px rgba(0,0,0,.35)}
 .pin.top{background:var(--ok)}.pin.over{background:var(--warn)}
 .leaflet-tooltip.pin:before{display:none}
-.pop b{font-size:1rem}.popimg{display:block;width:220px;max-width:100%;height:130px;object-fit:cover;border-radius:8px;margin:0 0 6px}.pop a{display:inline-block;margin-top:6px;margin-right:10px;font-weight:600}
+.pop b{font-size:1rem}.popimg{display:block;width:220px;max-width:100%;height:110px;object-fit:cover;border-radius:8px;margin:0 0 6px}.pop a{display:inline-block;margin-top:6px;margin-right:10px;font-weight:600}
 article.c{scroll-margin-top:120px}
 article.c.hi{outline:3px solid var(--acc);outline-offset:2px}
 </style></head><body>
@@ -165,6 +165,7 @@ try{
   leg.push(`<a href="#h${i}" onclick="goHouse(${i});return false"><span class="num ${col}">${k+1}</span><span><b>${esc(x.name)}</b>${x.neu?` <span class="new">Neu</span>`:""}<br><small>${esc(x.ort)}</small></span><span class="lp">${f(x.price)}</span></a>`);
  });
  document.getElementById("legend").innerHTML=leg.join("");
+ m.on("popupopen",e=>{const im=e.popup.getElement().querySelector("img");const up=()=>{e.popup.update()};if(im&&!im.complete){im.addEventListener("load",up);im.addEventListener("error",up)}else up();});
  const fit=()=>{m.invalidateSize();if(pts.length)m.fitBounds(pts,{padding:[30,30],maxZoom:11})};
  fit();window.addEventListener("load",fit);setTimeout(fit,600);
  if(window.ResizeObserver)new ResizeObserver(()=>fit()).observe(document.getElementById("map"));
