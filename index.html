@@ -161,7 +161,7 @@ try{
   const col=x.price>B?"over":x.top?"top":"";
   const ic=L.divIcon({className:"",html:`<div class="num ${col}">${k+1}</div>`,iconSize:[26,26],iconAnchor:[13,13]});
   L.marker([x.lat,x.lng],{icon:ic,title:x.name,zIndexOffset:100-k}).addTo(m)
-   .bindPopup(`<div class="pop">${x.img?`<img class="popimg" src="${esc(x.img)}" alt="${esc(x.name)}" onerror="this.remove()">`:""}<b>${x.top?"🏆 ":""}${esc(x.name)}</b><br>📍 ${esc(x.ort)}<br>💰 ${f(x.price)} gesamt<br><a href="#h${i}" onclick="goHouse(${i});return false">Zum Haus ↓</a><a href="${esc(x.url)}" target="_blank" rel="noopener">Beim Anbieter ↗</a><br><a href="${wa(x)}" target="_blank" rel="noopener">💬 In WhatsApp teilen</a></div>`);
+   .bindPopup(()=>`<div class="pop">${x.img?`<img class="popimg" src="${esc(x.img)}" alt="${esc(x.name)}" onerror="this.remove()">`:""}<b>${x.top?"🏆 ":""}${esc(x.name)}</b><br>📍 ${esc(x.ort)}<br>💰 ${f(x.price)} gesamt<br>👍 ${x.score?`${String(x.score).replace(".",",")} von ${x.max} (${x.n} ${x.n==1?"Bewertung":"Bewertungen"}, ${esc(x.rsrc)})`:`Noch keine Bewertungen (${esc(x.rsrc)})`}<br>⭐ ${who(x).length?`${who(x).length}: ${who(x).map(esc).join(", ")}`:"Noch keine Sterne der Gruppe"}<br><a href="#h${i}" onclick="goHouse(${i});return false">Zum Haus ↓</a><a href="${esc(x.url)}" target="_blank" rel="noopener">Beim Anbieter ↗</a><br><a href="${wa(x)}" target="_blank" rel="noopener">💬 In WhatsApp teilen</a></div>`);
   leg.push(`<a href="#h${i}" onclick="goHouse(${i});return false"><span class="num ${col}">${k+1}</span><span><b>${esc(x.name)}</b>${x.neu?` <span class="new">Neu</span>`:""}<br><small>${esc(x.ort)}</small></span><span class="lp">${f(x.price)}</span></a>`);
  });
  document.getElementById("legend").innerHTML=leg.join("");
