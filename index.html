@@ -160,7 +160,9 @@ try{
   leg.push(`<a href="#h${i}" onclick="goHouse(${i});return false"><span class="num ${col}">${k+1}</span><span><b>${esc(x.name)}</b>${x.neu?` <span class="new">Neu</span>`:""}<br><small>${esc(x.ort)}</small></span><span class="lp">${f(x.price)}</span></a>`);
  });
  document.getElementById("legend").innerHTML=leg.join("");
- if(pts.length)m.fitBounds(pts,{padding:[30,30]});
+ const fit=()=>{m.invalidateSize();if(pts.length)m.fitBounds(pts,{padding:[30,30],maxZoom:11})};
+ fit();window.addEventListener("load",fit);setTimeout(fit,600);
+ if(window.ResizeObserver)new ResizeObserver(()=>fit()).observe(document.getElementById("map"));
 }catch(e){document.getElementById("map").outerHTML='<p class="maphint">Karte konnte nicht geladen werden.</p>';}
 const mh=location.hash.match(/^#h(\d+)$/);if(mh)setTimeout(()=>goHouse(+mh[1]),300);
 </script></body></html>
