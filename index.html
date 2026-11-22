@@ -35,7 +35,7 @@ footer{max-width:960px;margin:auto;padding:0 16px 32px;color:var(--mute);font-si
 .num.top{background:var(--ok)}.num.over{background:var(--warn)}
 #legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px;margin:0 0 14px}
 #legend a{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--card);border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none;line-height:1.25}
-#legend small{color:var(--mute)}#legend .lp{margin-left:auto;font-weight:700;white-space:nowrap}
+#legend small{color:var(--mute)}.lst{font-size:.8rem;color:#9a7400;font-weight:600}#legend .lp{margin-left:auto;font-weight:700;white-space:nowrap}
 .go.wa{background:#1f8f4e;margin-top:8px}
 @media (prefers-color-scheme:dark){.go.wa{background:#4cc47f}}
 .vote{background:var(--card);border:1px solid var(--line);border-left:4px solid #e0a800;border-radius:12px;padding:12px 14px;margin:10px 0;transition:box-shadow .3s}
@@ -68,7 +68,7 @@ article.c.hi{outline:3px solid var(--acc);outline-offset:2px}
 <p class="sub">Moderne und gepflegte Häuser auf ganz Mallorca · 19.6.–3.7.2027 · 4 Personen · mit Pool</p>
 <div class="facts"><span>📅 19. Juni – 3. Juli 2027 (14 Nächte)</span><span>💰 Budget CHF 7'000–10'000</span><span id="cnt"></span></div>
 <div id="map" role="region" aria-label="Karte von Mallorca mit allen Häusern"></div>
-<p class="maphint">🗺️ Tippt auf eine Nummer in der Karte oder auf ein Haus in der Liste, um direkt hinzuspringen. Grün = Top 3, Orange = über Budget.</p>
+<p class="maphint">🗺️ Tippt auf eine Nummer in der Karte oder auf ein Haus in der Liste, um direkt hinzuspringen. Die Häuser mit den meisten Sternen stehen zuerst. Grün = Top 3, Orange = über Budget.</p>
 <div id="legend"></div>
 <div class="note"><b>Gut zu wissen:</b> Ende Juni ist Hochsaison, mit 28–32 °C. Achtet auf <b>Klimaanlage</b> in den Schlafzimmern. Gute Häuser sind früh weg, also lieber bald entscheiden. Preise sind Momentaufnahmen vom 21.11.2026 und können sich ändern.</div>
 <div class="note" style="border-color:var(--ok)"><b>Ehrliches Fazit:</b> Neu dabei sind 10 Häuser mit etwas weniger Luxus: gepflegte, renovierte Fincas und Villen mit Pool, freistehend, im Preisrahmen. Sie sind mit <span class="new">Neu</span> markiert. Am modernsten davon sind <b>Integra</b> (Sencelles) und <b>Can Marcos</b> (Porreres, Neubau mit Rundumblick). Nahe Palma liegen <b>Santa Ponça</b>, <b>Finca es Born</b> und <b>Casa Na Servera</b>. Bisherige Top 3 bleiben: Galeria Verde, Felicidad, Ibel. Preise in CHF umgerechnet (1 EUR ≈ 0.93 CHF), bitte beim Anbieter bestätigen. <b>Neu hinzugefügt:</b> Es Rafal (Calonge) und Sineu. Achtung: Sineu ist für 19.6.–3.7. nicht frei, nur 16.6.–30.6. Bewertungen stammen von der jeweiligen Quelle; viele Häuser haben erst wenige.</div>
@@ -138,7 +138,7 @@ function draw(){
  <div class="tags">${x.hl.map(h=>`<span>${esc(h)}</span>`).join("")}</div>
  <a class="go" href="${esc(x.url)}" target="_blank" rel="noopener">Ansehen auf ${esc(x.src)}</a><a class="go wa" href="${wa(x)}" target="_blank" rel="noopener">💬 In WhatsApp teilen</a></div></article>`).join("")||"<p>Keine Häuser gefunden.</p>";
  document.querySelectorAll(".fav").forEach(b=>b.onclick=()=>toggle(b.dataset.id));
- drawRank();
+ drawRank();if(typeof drawMap==="function")drawMap();
 }
 reg.onchange=draw;nw.onchange=draw;acf.onchange=draw;document.getElementById("sort").onchange=draw;
 document.getElementById("fo").onclick=e=>{onlyFav=!onlyFav;e.target.style.borderColor=onlyFav?"var(--acc)":"";draw()};
@@ -147,6 +147,21 @@ setInterval(()=>{if(!document.hidden)load()},10000);document.addEventListener("v
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
+let popOpen=false,mapPending=false,mapKey="";
+function drawMap(){
+ const ord=D.map((x,i)=>i).sort((a,b)=>who(D[b]).length-who(D[a]).length||D[a].price-D[b].price);
+ const key=ord.map(i=>i+":"+who(D[i]).join("")).join("|");
+ if(key===mapKey)return;
+ if(popOpen){mapPending=true;return}
+ mapPending=false;mapKey=key;
+ if(window.MAP)MAP.layer.clearLayers();
+ const leg=[];
+ ord.forEach((i,k)=>{const x=D[i];const col=x.price>B?"over":x.top?"top":"";const w=who(x);
+  if(window.addMarker&&x.lat)addMarker(x,i,k,col);
+  leg.push(`<a href="#h${i}" onclick="goHouse(${i});return false"><span class="num ${col}">${k+1}</span><span><b>${esc(x.name)}</b>${x.neu?` <span class="new">Neu</span>`:""}<br><small>${esc(x.ort)}</small>${w.length?`<br><span class="lst">${"⭐".repeat(w.length)} ${w.map(esc).join(", ")}</span>`:""}</span><span class="lp">${f(x.price)}</span></a>`);
+ });
+ document.getElementById("legend").innerHTML=leg.join("");
+}
 function goHouse(i){reg.value="";nw.value="";acf.value="";onlyFav=false;document.getElementById("fo").style.borderColor="";draw();
  const el=document.getElementById("h"+i);if(!el)return;el.scrollIntoView({behavior:"smooth",block:"start"});
  el.classList.add("hi");setTimeout(()=>el.classList.remove("hi"),2500);}
@@ -154,22 +169,20 @@ try{
  const m=L.map("map",{scrollWheelZoom:false}).setView([39.62,2.95],9);
  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap"}).addTo(m);
  L.circleMarker([39.5696,2.6502],{radius:6,color:"#555",fillOpacity:.8}).addTo(m).bindTooltip("Palma",{permanent:true,direction:"bottom"});
- const pts=[];
- const ord=D.map((x,i)=>i).sort((a,b)=>(D[a].top||99)-(D[b].top||99)||D[a].price-D[b].price);
- const leg=[];
- ord.forEach((i,k)=>{const x=D[i];if(!x.lat)return;pts.push([x.lat,x.lng]);
-  const col=x.price>B?"over":x.top?"top":"";
+ const pts=D.filter(x=>x.lat).map(x=>[x.lat,x.lng]);
+ const layer=L.layerGroup().addTo(m);
+ window.MAP={m,layer,pop:(x,i)=>0};
+ window.addMarker=(x,i,k,col)=>{
   const ic=L.divIcon({className:"",html:`<div class="num ${col}">${k+1}</div>`,iconSize:[26,26],iconAnchor:[13,13]});
-  L.marker([x.lat,x.lng],{icon:ic,title:x.name,zIndexOffset:100-k}).addTo(m)
+  L.marker([x.lat,x.lng],{icon:ic,title:x.name,zIndexOffset:100-k}).addTo(layer)
    .bindPopup(()=>`<div class="pop">${x.img?`<img class="popimg" src="${esc(x.img)}" alt="${esc(x.name)}" onerror="this.remove()">`:""}<b>${x.top?"🏆 ":""}${esc(x.name)}</b><br>📍 ${esc(x.ort)}<br>💰 ${f(x.price)} gesamt<br>👍 ${x.score?`${String(x.score).replace(".",",")} von ${x.max} (${x.n} ${x.n==1?"Bewertung":"Bewertungen"}, ${esc(x.rsrc)})`:`Noch keine Bewertungen (${esc(x.rsrc)})`}<br>⭐ ${who(x).length?`${who(x).length}: ${who(x).map(esc).join(", ")}`:"Noch keine Sterne der Gruppe"}<br><a href="#h${i}" onclick="goHouse(${i});return false">Zum Haus ↓</a><a href="${esc(x.url)}" target="_blank" rel="noopener">Beim Anbieter ↗</a><br><a href="${wa(x)}" target="_blank" rel="noopener">💬 In WhatsApp teilen</a></div>`);
-  leg.push(`<a href="#h${i}" onclick="goHouse(${i});return false"><span class="num ${col}">${k+1}</span><span><b>${esc(x.name)}</b>${x.neu?` <span class="new">Neu</span>`:""}<br><small>${esc(x.ort)}</small></span><span class="lp">${f(x.price)}</span></a>`);
- });
- document.getElementById("legend").innerHTML=leg.join("");
+ };
  m.on("popupopen",e=>{const im=e.popup.getElement().querySelector("img");const up=()=>{e.popup.update()};if(im&&!im.complete){im.addEventListener("load",up);im.addEventListener("error",up)}else up();});
- let popOpen=false;m.on("popupopen",()=>popOpen=true);m.on("popupclose",()=>popOpen=false);
+ m.on("popupopen",()=>popOpen=true);m.on("popupclose",()=>{popOpen=false;if(mapPending)drawMap()});
  const fit=()=>{if(popOpen)return;m.invalidateSize();if(pts.length)m.fitBounds(pts,{padding:[30,30],maxZoom:11})};
  fit();window.addEventListener("load",fit);setTimeout(fit,600);
  if(window.ResizeObserver)new ResizeObserver(()=>fit()).observe(document.getElementById("map"));
 }catch(e){document.getElementById("map").outerHTML='<p class="maphint">Karte konnte nicht geladen werden.</p>';}
+drawMap();
 const mh=location.hash.match(/^#h(\d+)$/);if(mh)setTimeout(()=>goHouse(+mh[1]),300);
 </script></body></html>
