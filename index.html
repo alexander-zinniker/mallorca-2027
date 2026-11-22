@@ -198,6 +198,7 @@ footer{max-width:none;padding:0 0 32px}
 .lgs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}.srcb{position:absolute;right:12px;bottom:12px;z-index:2;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.25);border-radius:999px}
 .cimg{margin:-6px -6px 10px;height:150px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}.cimg img{max-width:100%;max-height:140px;object-fit:contain}.cimg img[src*="sixt.com"]{width:100%;height:150px;max-height:none;object-fit:cover;object-position:center 62%}
 .rvb{display:inline-block;font-size:.8rem;border-radius:10px;padding:4px 10px;margin:2px 0 6px}.rvb.good{background:#e3f4e8;color:#17663a}.rvb.mid{background:#fff1dc;color:#9a5b00}.rvb.bad{background:#fde4e1;color:#b42318}
+.acts{margin-top:auto;padding-top:12px;display:grid;gap:8px}.acts .go{margin:0!important;min-height:46px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.95rem;line-height:1}.acts .wa{border-width:1.5px}.tg{align-items:stretch}.tc{height:100%;box-sizing:border-box}
 </style></head><body>
 <section class="hero" id="top">
 <div class="hero-bg" style="background-image:url('https://i0.wp.com/sunsetobsession.com/wp-content/uploads/2021/05/Sa-Foradada.jpg?resize=2200%2C1472&ssl=1'),url('https://i0.wp.com/sunsetobsession.com/wp-content/uploads/2021/05/Sa-Foradada.jpg?resize=1200%2C803&ssl=1')"></div><div class="ov ov-morgen"></div><div class="ov ov-mittag"></div><div class="ov ov-abend"></div><div class="ov ov-nacht"></div><div class="hero-st"></div><div class="hero-st b"></div>
@@ -361,16 +362,16 @@ function drawTravel(){
  <div class="tl"><b>Rück</b> Sa 3.7. · ${o.back[1]} Palma → ${o.back[2]} Zürich · ${o.back[0]}</div>
  <div class="price">ca. ${f(o.price)} <span class="pp">für 4 Personen · ca. ${f(o.price/4)} pro Person</span></div>
  ${o.note?`<div class="loc">${esc(o.note)}</div>`:""}
- <a class="go" href="${o.url}" target="_blank" rel="noopener">Diese Flüge buchen</a>
- <a class="go wa" href="${waT(`✈️ Flug ${o.air}\nHin Sa 19.6. ${o.out[1]} Zürich → ${o.out[2]} Palma (${o.out[0]})\nRück Sa 3.7. ${o.back[1]} Palma → ${o.back[2]} Zürich (${o.back[0]})\n💰 ca. ${f(o.price)} für 4 Personen\n👉 ${SITE}#${o.id}`)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div>`).join("");
+ <div class="acts"><a class="go" href="${o.url}" target="_blank" rel="noopener">Zum Angebot</a>
+ <a class="go wa" href="${waT(`✈️ Flug ${o.air}\nHin Sa 19.6. ${o.out[1]} Zürich → ${o.out[2]} Palma (${o.out[0]})\nRück Sa 3.7. ${o.back[1]} Palma → ${o.back[2]} Zürich (${o.back[0]})\n💰 ca. ${f(o.price)} für 4 Personen\n👉 ${SITE}#${o.id}`)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div></div>`).join("");
  document.getElementById("cars").innerHTML=CARS.map(o=>`<div class="tc rv${o.rec?" rec":""}" id="${o.id}">${o.img?`<div class="cimg"><img src="${o.img}" alt="${esc(o.name)}" loading="lazy" onerror="this.parentNode.remove()"></div>`:""}${o.tag?`<span class="badge${o.alt?" alt":""}">${o.tag}</span>`:""}
  <div class="t"><h4>${esc(o.name)} <span class="pp">oder ähnlich</span></h4>${tFav(o.id)}</div>${tStars(o.id)}
  ${lgs(o.prov||[])}${o.rv?`<div class="rvb ${o.rv[0]>=4?"good":o.rv[0]>=3.5?"mid":"bad"}">${o.rv[0]>=4?"👍":o.rv[0]>=3.5?"➖":"⚠️"} <b>${esc(o.rv[3])} ${String(o.rv[0].toFixed(1)).replace(".",",")}/5</b> · ${o.rv[1]} Bewertungen · ${esc(o.rv[2])}</div>`:""}<div class="loc">${o.bm?esc(o.cls):esc(o.cls)+" · Automatik"}</div>
  <div class="price">ca. ${f(o.price)} <span class="pp">pro Auto${o.eur?` (EUR ${o.eur})`:""} · 2 Autos ca. ${f(o.price*2)}</span></div>
  ${o.inc?`<div class="loc">✅ ${esc(o.inc)}</div>`:`<div class="loc">⚠️ Ohne Extra-Schutz: Selbstbehalt bis Fahrzeugwert. Sixt-Vollschutz kostet ca. CHF 20 pro Tag, Zusatzfahrer ca. CHF 7 pro Tag.</div>`}
  <div class="loc">ca. ${f(o.price/14)} pro Tag und Auto · pro Paar ein Auto</div>
- ${o.bm?`<a class="go" href="${o.url}" target="_blank" rel="noopener">Zum Angebot bei billiger-mietwagen.de</a>`:`<a class="go" href="${SIXT}" target="_blank" rel="noopener">Bei Sixt ansehen (Daten vorausgefüllt)</a>`}
- <a class="go wa" href="${waT(`🚗 Mietwagen ${o.name} oder ähnlich (${o.bm?"billiger-mietwagen.de, mit Rundumschutz":"Sixt"}, Flughafen Palma)\n💰 ca. ${f(o.price)} pro Auto · 2 Autos ca. ${f(o.price*2)}\n👉 ${SITE}#${o.id}`)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div>`).join("");
+ <div class="acts">${o.bm?`<a class="go" href="${o.url}" target="_blank" rel="noopener">Zum Angebot</a>`:`<a class="go" href="${SIXT}" target="_blank" rel="noopener">Zum Angebot</a>`}
+ <a class="go wa" href="${waT(`🚗 Mietwagen ${o.name} oder ähnlich (${o.bm?"billiger-mietwagen.de, mit Rundumschutz":"Sixt"}, Flughafen Palma)\n💰 ca. ${f(o.price)} pro Auto · 2 Autos ca. ${f(o.price*2)}\n👉 ${SITE}#${o.id}`)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div></div>`).join("");
  const fr=FL[0].price,cr=CARS[0].price*2;
  const cb=CARS.find(x=>x.id=="car-5").price*2;document.getElementById("tsum").textContent=`Grobe Rechnung: Flüge ca. ${f(fr)} + 2 Autos. Mit 2 × Seat Leon inkl. Vollschutz (billiger-mietwagen.de) ca. ${f(cb)}: total ca. ${f(fr+cb)}, pro Paar ca. ${f((fr+cb)/2)}. Mit 2 × BMW 1er bei Sixt ohne Extra-Schutz ca. ${f(cr)}: total ca. ${f(fr+cr)}, pro Paar ca. ${f((fr+cr)/2)}. Zusätzlich zum Haus, ohne Gepäck und Benzin.`;
 }
@@ -391,7 +392,7 @@ function draw(){drawTravel();
  <div class="meter" title="Anteil am Budget"><i style="width:${Math.min(100,x.price/B*100)}%"></i></div>
  <div class="loc">${Math.round(x.price/B*100)}% vom Budget${x.sz?` · 🛏 ${x.sz} Schlafzimmer`:""}${x.bz?` · 🚿 ${x.bz} Bad`:""}</div>
  <div class="tags">${x.hl.map(h=>`<span>${esc(h)}</span>`).join("")}</div>
- <a class="go" href="${esc(x.url)}" target="_blank" rel="noopener">Ansehen auf ${esc(x.src)}</a><a class="go wa" href="${wa(x)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div></article>`).join("")||"<p>Keine Häuser gefunden.</p>";
+ <div class="acts"><a class="go" href="${esc(x.url)}" target="_blank" rel="noopener">Zum Angebot</a><a class="go wa" href="${wa(x)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div></div></article>`).join("")||"<p>Keine Häuser gefunden.</p>";
  document.querySelectorAll(".fav").forEach(b=>b.onclick=()=>toggle(b.dataset.id));
  drawRank();if(typeof drawMap==="function")drawMap();
 }
