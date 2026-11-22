@@ -231,6 +231,7 @@ document.addEventListener("DOMContentLoaded",scan);
 <section class="intro rv" id="intro">
 <div class="notes">
 <div class="note upd"><h3>Updates</h3><ul class="ul">
+<li><time>22.11.2026</time><span>Mietwagen: Vergleich mit billiger-mietwagen.de inkl. Rundumschutz, ab ca. CHF 539 pro Auto. WhatsApp-Knöpfe heissen jetzt «diskutieren».</span></li>
 <li><time>22.11.2026</time><span>Neu: Hier seht ihr live, wer welchem Haus, Flug oder Auto einen Stern gegeben hat.</span></li>
 <li><time>22.11.2026</time><span>Neues Design: Farben wechseln mit der Tageszeit, grosses Titelbild, Karte neben den Häusern auf grossen Bildschirmen.</span></li>
 <li><time>22.11.2026</time><span>Anreise: Swiss-Flüge und zwei Mietwagen (1 pro Paar), auch mit Sternen. Dazu Logo und Leiste unten.</span></li>
@@ -266,8 +267,9 @@ document.addEventListener("DOMContentLoaded",scan);
 <h3 id="flug" style="scroll-margin-top:12px">✈️ Flüge Zürich – Palma</h3>
 <div class="tg" id="flights"></div>
 <p class="vh">Tipp: Direkt bei Swiss buchen lohnt sich oft, weil dort Gepäck und Sitzplätze im Tarif klar sind. <a href="https://www.swiss.com/ch/de" target="_blank" rel="noopener">swiss.com</a> · <a href="https://www.google.com/travel/flights?q=Flights%20from%20ZRH%20to%20PMI%20on%202027-06-19%20through%202027-07-03%20for%204%20adults%20nonstop&amp;hl=de&amp;curr=CHF" target="_blank" rel="noopener">Alle Direktflüge in Google Flüge</a></p>
-<h3 id="auto" style="scroll-margin-top:12px">🚗 Mietwagen bei Sixt, Flughafen Palma</h3>
-<p class="sub">Abholung Sa 19.6. um 18:00, Rückgabe Sa 3.7. um 09:00 (Schalter offen 07:00–23:59). 14 Tage, unbegrenzte Kilometer, Automatik.</p>
+<h3 id="auto" style="scroll-margin-top:12px">🚗 Mietwagen am Flughafen Palma: Sixt und billiger-mietwagen.de</h3>
+<p class="sub">Abholung Sa 19.6. um 18:00, Rückgabe Sa 3.7. um 09:00 (Sixt-Schalter offen 07:00–23:59). 14 Tage, unbegrenzte Kilometer, Automatik.</p>
+<div class="note" style="margin:0 0 16px"><b>Ehrlicher Vergleich (Stand 22.11.2026, pro Auto, 14 Tage):</b> Sixt BMW 1er kostet ohne Extras CHF 1'171, dann zahlt ihr bei einem Schaden aber bis zum Fahrzeugwert. Mit Sixt-Vollschutz ohne Selbstbehalt und einem Zusatzfahrer sind es ca. <b>CHF 1'594</b>. Bei billiger-mietwagen.de mit Rundumschutz- und Premium-Zusatz-Paket kostet ein Kompaktwagen mit Automatik ca. <b>CHF 539</b> (EUR 580). Die Aussage «weit unter 1000 €» stimmt also. Unterschiede: kein BMW, sondern Seat Leon oder ähnlich; Vermittler ist Sunny Cars, die lokale Firma wird erst bei der Buchung genannt; Abholung per Shuttle-Bus statt am Terminal; 900 € Kaution auf der Kreditkarte. Premium-Marken mit beiden Paketen kosten dort ab ca. CHF 1'494.</div>
 <div class="tg" id="cars"></div>
 <div class="note" style="border-color:var(--ok)"><b>Ehrliche Einschätzung:</b> Für 2 Personen mit Gepäck für 2 Wochen ist der <b>BMW 1er</b> gut geeignet: Platz für 3 Koffer, Rückbank frei. Sixt garantiert nur die Wagenklasse, nicht das genaue Modell. Preise sind Grundpreise ohne Zusatzversicherung und ohne Zusatzfahrer.</div>
 <p class="tsum" id="tsum"></p>
@@ -325,7 +327,10 @@ const CARS=[
  {id:"car-1",rec:1,tag:"Euer Wunsch",name:"BMW 1er",cls:"Kompaktklasse Premium · 5 Sitze · 3 Koffer",price:1171},
  {id:"car-2",name:"Audi Q2",cls:"Kleiner SUV Premium · 5 Sitze · 3 Koffer · etwas höher",price:1230},
  {id:"car-3",name:"Audi A3 Limousine",cls:"Mittelklasse Premium · 5 Sitze · 3 Koffer",price:1299},
- {id:"car-4",alt:1,tag:"Eine Klasse höher",name:"BMW 3er",cls:"Obere Mittelklasse · 5 Sitze · 4 Koffer",price:1758}];
+ {id:"car-4",alt:1,tag:"Eine Klasse höher",name:"BMW 3er",cls:"Obere Mittelklasse · 5 Sitze · 4 Koffer",price:1758},
+ {id:"car-5",bm:1,rec:1,tag:"Günstigster Vollschutz",name:"Seat Leon",cls:"Kompaktklasse · Automatik · 5 Sitze",price:539,eur:580,inc:"Vollkasko ohne Selbstbehalt, Glas, Reifen, Unterboden · 1 Zusatzfahrer · alle Kilometer · Tank voll/voll · Kaution 900 € · Shuttle-Bus · über Sunny Cars"},
+ {id:"car-6",bm:1,name:"Renault Arkana",cls:"Mittelklasse Crossover · Automatik · 5 Sitze · etwas höher",price:609,eur:655,inc:"Vollkasko ohne Selbstbehalt, Glas, Reifen, Unterboden · 1 Zusatzfahrer · alle Kilometer · Tank voll/voll · Kaution 1'250 € · Shuttle-Bus · über Sunny Cars"}];
+const BM="https://www.billiger-mietwagen.de/de-de/reservation/quotes/f8f8e20edcde7fd7675df27fa44bcb95?filter=station_type_airport&filter=glass_and_tires_protection&filter=underbody_protection&filter=liability_good&filter=comprehensive_cover_without_deductible&filter=comprehensive_cover_without_deductible_by_refund&filter=additional_driver_included&filter=mileage_unlimited&filter=fuel_policy_good";
 const SIXT="https://www.sixt.ch/betafunnel/#/offerlist?zen_pu_location=84b5aadd-f6eb-4c25-941e-8f8f02e49623&zen_do_location=84b5aadd-f6eb-4c25-941e-8f8f02e49623&zen_pu_title=Mallorca%20Palma%20Flughafen&zen_do_title=Mallorca%20Palma%20Flughafen&zen_pu_time=2027-06-19T18:00&zen_do_time=2027-07-03T09:00&zen_pu_branch_id=BRANCH:6809&zen_do_branch_id=BRANCH:6809&zen_vehicle_type=car&zen_pickup_country_code=ES&zen_resident_country_required=false&zen_point_of_sale=CH";
 function tStars(id){const w=PEOPLE.filter(p=>V[p]&&V[p][id]);return w.length?`<div class="stars">${"⭐".repeat(w.length)} ${w.map(esc).join(", ")}</div>`:""}
 function tFav(id){return `<button class="fav" data-id="${id}" aria-label="Stern setzen oder entfernen">${me&&V[me]&&V[me][id]?"⭐":"☆"}</button>`}
@@ -341,13 +346,14 @@ function drawTravel(){
  <a class="go wa" href="${waT(`✈️ Flug ${o.air}\nHin Sa 19.6. ${o.out[1]} Zürich → ${o.out[2]} Palma (${o.out[0]})\nRück Sa 3.7. ${o.back[1]} Palma → ${o.back[2]} Zürich (${o.back[0]})\n💰 ca. ${f(o.price)} für 4 Personen\n👉 ${SITE}#${o.id}`)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div>`).join("");
  document.getElementById("cars").innerHTML=CARS.map(o=>`<div class="tc rv${o.rec?" rec":""}" id="${o.id}">${o.tag?`<span class="badge${o.alt?" alt":""}">${o.tag}</span>`:""}
  <div class="t"><h4>${esc(o.name)} <span class="pp">oder ähnlich</span></h4>${tFav(o.id)}</div>${tStars(o.id)}
- <div class="loc">${esc(o.cls)} · Automatik</div>
- <div class="price">ca. ${f(o.price)} <span class="pp">pro Auto · 2 Autos ca. ${f(o.price*2)}</span></div>
+ <div class="loc">${o.bm?"billiger-mietwagen.de · "+esc(o.cls):"Sixt · "+esc(o.cls)+" · Automatik"}</div>
+ <div class="price">ca. ${f(o.price)} <span class="pp">pro Auto${o.eur?` (EUR ${o.eur})`:""} · 2 Autos ca. ${f(o.price*2)}</span></div>
+ ${o.inc?`<div class="loc">✅ ${esc(o.inc)}</div>`:`<div class="loc">⚠️ Ohne Extra-Schutz: Selbstbehalt bis Fahrzeugwert. Sixt-Vollschutz kostet ca. CHF 20 pro Tag, Zusatzfahrer ca. CHF 7 pro Tag.</div>`}
  <div class="loc">ca. ${f(o.price/14)} pro Tag und Auto · pro Paar ein Auto</div>
- <a class="go" href="${SIXT}" target="_blank" rel="noopener">Bei Sixt ansehen (Daten vorausgefüllt)</a>
- <a class="go wa" href="${waT(`🚗 Mietwagen ${o.name} oder ähnlich (Sixt, Flughafen Palma)\n💰 ca. ${f(o.price)} pro Auto · 2 Autos ca. ${f(o.price*2)}\n👉 ${SITE}#${o.id}`)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div>`).join("");
+ ${o.bm?`<a class="go" href="${BM}${o.id=="car-6"?"&filter=car_class_midsize":"&filter=car_class_compact"}" target="_blank" rel="noopener">Bei billiger-mietwagen.de ansehen</a>`:`<a class="go" href="${SIXT}" target="_blank" rel="noopener">Bei Sixt ansehen (Daten vorausgefüllt)</a>`}
+ <a class="go wa" href="${waT(`🚗 Mietwagen ${o.name} oder ähnlich (${o.bm?"billiger-mietwagen.de, mit Rundumschutz":"Sixt"}, Flughafen Palma)\n💰 ca. ${f(o.price)} pro Auto · 2 Autos ca. ${f(o.price*2)}\n👉 ${SITE}#${o.id}`)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div>`).join("");
  const fr=FL[0].price,cr=CARS[0].price*2;
- document.getElementById("tsum").textContent=`Grobe Rechnung mit der Empfehlung: Flüge ca. ${f(fr)} + 2 × BMW 1er ca. ${f(cr)} = ca. ${f(fr+cr)} total, also ca. ${f((fr+cr)/2)} pro Paar (zusätzlich zum Haus, ohne Gepäck und Benzin).`;
+ const cb=CARS.find(x=>x.id=="car-5").price*2;document.getElementById("tsum").textContent=`Grobe Rechnung: Flüge ca. ${f(fr)} + 2 Autos. Mit 2 × Seat Leon inkl. Vollschutz (billiger-mietwagen.de) ca. ${f(cb)}: total ca. ${f(fr+cb)}, pro Paar ca. ${f((fr+cb)/2)}. Mit 2 × BMW 1er bei Sixt ohne Extra-Schutz ca. ${f(cr)}: total ca. ${f(fr+cr)}, pro Paar ca. ${f((fr+cr)/2)}. Zusätzlich zum Haus, ohne Gepäck und Benzin.`;
 }
 function jump(id){const el=document.getElementById(id);if(!el)return;el.scrollIntoView({behavior:"smooth",block:"start"});el.classList.add("hi");setTimeout(()=>el.classList.remove("hi"),2200)}
 function draw(){drawTravel();
