@@ -194,6 +194,8 @@ footer{max-width:none;padding:0 0 32px}
 .leaflet-popup-content-wrapper{border-radius:16px}
 .note h3{font-family:"Cormorant Garamond",serif;font-size:1.5rem;margin:0 0 8px;font-weight:600}.note.upd{border-left-color:var(--acc)}.note.act{border-left-color:var(--ok)}
 .ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}.ul li{display:flex;gap:10px;line-height:1.4}.ul time{flex:none;font-size:.78rem;font-weight:700;color:var(--acc);min-width:76px;padding-top:2px}.ul small,.ul .mu{color:var(--mute)}.ul .fw{flex:none}
+.lg{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;background:#fff;color:#1d2939;border:1px solid rgba(16,24,40,.12);border-radius:999px;padding:3px 10px 3px 4px;line-height:1.2;white-space:nowrap}.lg img{width:16px;height:16px;border-radius:4px;background:#fff}
+.lgs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}.srcb{position:absolute;right:12px;bottom:12px;z-index:2;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.25);border-radius:999px}
 </style></head><body>
 <section class="hero" id="top">
 <div class="hero-bg" style="background-image:url('https://i0.wp.com/sunsetobsession.com/wp-content/uploads/2021/05/Sa-Foradada.jpg?resize=2200%2C1472&ssl=1'),url('https://i0.wp.com/sunsetobsession.com/wp-content/uploads/2021/05/Sa-Foradada.jpg?resize=1200%2C803&ssl=1')"></div><div class="ov ov-morgen"></div><div class="ov ov-mittag"></div><div class="ov ov-abend"></div><div class="ov ov-nacht"></div><div class="hero-st"></div><div class="hero-st b"></div>
@@ -231,6 +233,7 @@ document.addEventListener("DOMContentLoaded",scan);
 <section class="intro rv" id="intro">
 <div class="notes">
 <div class="note upd"><h3>Updates</h3><ul class="ul">
+<li><time>22.11.2026</time><span>Logos der Anbieter auf allen Karten. 8 Mietwagen von billiger-mietwagen.de mit Vollschutz und direktem Link zum Angebot.</span></li>
 <li><time>22.11.2026</time><span>Mietwagen: Vergleich mit billiger-mietwagen.de inkl. Rundumschutz, ab ca. CHF 539 pro Auto. WhatsApp-Knöpfe heissen jetzt «diskutieren».</span></li>
 <li><time>22.11.2026</time><span>Neu: Hier seht ihr live, wer welchem Haus, Flug oder Auto einen Stern gegeben hat.</span></li>
 <li><time>22.11.2026</time><span>Neues Design: Farben wechseln mit der Tageszeit, grosses Titelbild, Karte neben den Häusern auf grossen Bildschirmen.</span></li>
@@ -314,6 +317,9 @@ const reg=document.getElementById("reg");const nw=document.getElementById("nw");
 const f=n=>"CHF "+Math.round(n).toLocaleString("de-CH");
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const SITE="https://alexander-zinniker.github.io/mallorca-2027/";
+const lg=(d,n)=>`<span class="lg">${d?`<img src="https://icons.duckduckgo.com/ip3/${d}.ico" alt="" loading="lazy" onerror="this.remove()">`:""}${esc(n)}</span>`;
+const lgs=a=>`<div class="lgs">${a.map(p=>lg(p[0],p[1])).join("")}</div>`;
+const host=u=>{try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return ""}};
 const waT=t=>"https://wa.me/?text="+encodeURIComponent(t);
 const wa=x=>"https://wa.me/?text="+encodeURIComponent(`🏡 ${x.name}\n📍 ${x.ort}\n💰 ${f(x.price)} für 14 Nächte (19.6.–3.7.2027)\n👉 ${SITE}#h${D.indexOf(x)}`);
 const rk=x=>x.score?(x.score/x.max)*Math.min(x.n,20):0;
@@ -324,12 +330,18 @@ const FL=[
  {id:"fl-4",out:["LX 8246","17:10","19:00"],back:["LX 2157","14:55","16:55"],air:"Swiss, beide Wege",price:1054,url:"https://kiwi.com/u/y3b7425h2v",note:"Für alle, die am letzten Tag nicht hetzen wollen."},
  {id:"fl-5",alt:1,tag:"Sparvariante, nicht Swiss",out:["LX 8246","17:10","19:00"],back:["VY 3684","09:55","11:55"],air:"Hin Swiss, zurück Vueling",price:402,url:"https://kiwi.com/u/2rp9g77c65",note:"Sehr günstig, aber Vueling ist ein Billigflieger: Gepäck und Sitzplätze kosten extra."}];
 const CARS=[
- {id:"car-1",rec:1,tag:"Euer Wunsch",name:"BMW 1er",cls:"Kompaktklasse Premium · 5 Sitze · 3 Koffer",price:1171},
- {id:"car-2",name:"Audi Q2",cls:"Kleiner SUV Premium · 5 Sitze · 3 Koffer · etwas höher",price:1230},
- {id:"car-3",name:"Audi A3 Limousine",cls:"Mittelklasse Premium · 5 Sitze · 3 Koffer",price:1299},
- {id:"car-4",alt:1,tag:"Eine Klasse höher",name:"BMW 3er",cls:"Obere Mittelklasse · 5 Sitze · 4 Koffer",price:1758},
- {id:"car-5",bm:1,rec:1,tag:"Günstigster Vollschutz",name:"Seat Leon",cls:"Kompaktklasse · Automatik · 5 Sitze",price:539,eur:580,inc:"Vollkasko ohne Selbstbehalt, Glas, Reifen, Unterboden · 1 Zusatzfahrer · alle Kilometer · Tank voll/voll · Kaution 900 € · Shuttle-Bus · über Sunny Cars"},
- {id:"car-6",bm:1,name:"Renault Arkana",cls:"Mittelklasse Crossover · Automatik · 5 Sitze · etwas höher",price:609,eur:655,inc:"Vollkasko ohne Selbstbehalt, Glas, Reifen, Unterboden · 1 Zusatzfahrer · alle Kilometer · Tank voll/voll · Kaution 1'250 € · Shuttle-Bus · über Sunny Cars"}];
+ {id:"car-1",prov:[["sixt.ch","Sixt"]],rec:1,tag:"Euer Wunsch",name:"BMW 1er",cls:"Kompaktklasse Premium · 5 Sitze · 3 Koffer",price:1171},
+ {id:"car-2",prov:[["sixt.ch","Sixt"]],name:"Audi Q2",cls:"Kleiner SUV Premium · 5 Sitze · 3 Koffer · etwas höher",price:1230},
+ {id:"car-3",prov:[["sixt.ch","Sixt"]],name:"Audi A3 Limousine",cls:"Mittelklasse Premium · 5 Sitze · 3 Koffer",price:1299},
+ {id:"car-4",prov:[["sixt.ch","Sixt"]],alt:1,tag:"Eine Klasse höher",name:"BMW 3er",cls:"Obere Mittelklasse · 5 Sitze · 4 Koffer",price:1758},
+ {id:"car-5",bm:1,rec:1,tag:"Günstigster Vollschutz",name:"Seat Leon",cls:"Kompaktklasse · Automatik · 5 Sitze",price:539,eur:580,inc:"Vollkasko ohne Selbstbehalt, Glas, Reifen, Unterboden · 1 Zusatzfahrer · alle Kilometer · Tank voll/voll · Kaution 900 € · Shuttle-Bus · Bewertung 9,4/10",prov:[["billiger-mietwagen.de","billiger-mietwagen.de"],["sunnycars.de","Sunny Cars"]],url:"https://www.billiger-mietwagen.de/de-de/reservation/quotes/f8f8e20edcde7fd7675df27fa44bcb95/products/f56e50fea0cf4d95b0b266db2197f267/stations"},
+ {id:"car-6",bm:1,name:"Renault Arkana",cls:"Mittelklasse Crossover · Automatik · 5 Sitze · etwas höher",price:609,eur:655,inc:"Vollkasko ohne Selbstbehalt, Glas, Reifen, Unterboden · 1 Zusatzfahrer · alle Kilometer · Tank voll/voll · Kaution 1'250 € · Shuttle-Bus · Bewertung 9,4/10",prov:[["billiger-mietwagen.de","billiger-mietwagen.de"],["sunnycars.de","Sunny Cars"]],url:"https://www.billiger-mietwagen.de/de-de/reservation/quotes/f8f8e20edcde7fd7675df27fa44bcb95/products/2e92c53694f0490da469543337126966/stations"},
+ {id:"car-7",bm:1,name:"Skoda Karoq",cls:"Mittelklasse SUV · Automatik · 5 Sitze",price:781,eur:840,inc:"Vollkasko ohne Selbstbehalt, Glas, Reifen, Unterboden · 1 Zusatzfahrer · alle Kilometer · Tank voll/voll · ohne Kaution · Shuttle-Bus · Bewertung nur 6,3/10",prov:[["billiger-mietwagen.de","billiger-mietwagen.de"],["autoeurope.de","AutoEurope"],["","Niza (lokal)"]],url:"https://www.billiger-mietwagen.de/de-de/reservation/quotes/f8f8e20edcde7fd7675df27fa44bcb95/products/1b3fb5110258480f821c0bddad90b07a/stations"},
+ {id:"car-8",bm:1,name:"VW Tiguan",cls:"Obere Mittelklasse SUV · Automatik · 5 Sitze · viel Platz",price:836,eur:899,inc:"Vollkasko ohne Selbstbehalt, Glas, Reifen, Unterboden · 1 Zusatzfahrer · alle Kilometer · Tank voll/voll · Kaution 1'800 € · Shuttle-Bus · Bewertung nur 6,3/10",prov:[["billiger-mietwagen.de","billiger-mietwagen.de"],["autoeurope.de","AutoEurope"],["","Niza (lokal)"]],url:"https://www.billiger-mietwagen.de/de-de/reservation/quotes/f8f8e20edcde7fd7675df27fa44bcb95/products/b2be3023a8df4c15aa9f1e06194f3d97/stations"},
+ {id:"car-9",bm:1,name:"Cupra Formentor",cls:"Oberklasse Crossover · Automatik · sportlich",price:918,eur:987,inc:"Vollkasko ohne Selbstbehalt, Glas, Reifen, Unterboden · 1 Zusatzfahrer · alle Kilometer · Tank voll/voll · Kaution 2'500 € · Shuttle-Bus · Bewertung nur 6,3/10",prov:[["billiger-mietwagen.de","billiger-mietwagen.de"],["autoeurope.de","AutoEurope"],["","Niza (lokal)"]],url:"https://www.billiger-mietwagen.de/de-de/reservation/quotes/f8f8e20edcde7fd7675df27fa44bcb95/products/733c106c57e6465ba1be7634b490d087/stations"},
+ {id:"car-10",bm:1,name:"Volvo XC40",cls:"Premium-Marke · Mittelklasse SUV · Automatik",price:1402,eur:1508,inc:"Vollkasko: Selbstbehalt wird zurückerstattet · Glas, Reifen, Unterboden · 1 Zusatzfahrer · alle Kilometer · Kaution 700 € · am Terminal · Bewertung 9,2/10",prov:[["billiger-mietwagen.de","billiger-mietwagen.de"],["bsp-auto.com","BSP Auto"],["hertz.com","Hertz (lokal)"]],url:"https://www.billiger-mietwagen.de/de-de/reservation/quotes/f8f8e20edcde7fd7675df27fa44bcb95/products/063056f08b0c4160aa7cc0e7a542aa1d/stations"},
+ {id:"car-11",bm:1,name:"Citroën DS7",cls:"Premium SUV · Automatik · 5 Sitze",price:1494,eur:1606,inc:"Vollkasko ohne Selbstbehalt, Glas, Reifen, Unterboden · 1 Zusatzfahrer · alle Kilometer · Tank voll/voll · Kaution 120 € · Shuttle-Bus · Bewertung 9,3/10",prov:[["billiger-mietwagen.de","billiger-mietwagen.de"],["sunnycars.de","Sunny Cars"]],url:"https://www.billiger-mietwagen.de/de-de/reservation/quotes/f8f8e20edcde7fd7675df27fa44bcb95/products/b1bdea48fd564ae0b910683361073e97/stations"},
+ {id:"car-12",bm:1,tag:"Einziger BMW mit Vollschutz",name:"BMW X3",cls:"Premium-Marke · SUV · Automatik · 5 Sitze",price:1573,eur:1691,inc:"Vollkasko ohne Selbstbehalt, Glas, Reifen, Unterboden · 1 Zusatzfahrer · alle Kilometer · Tank voll/voll · Kaution 950 € · Shuttle-Bus · Bewertung nur 6,3/10",prov:[["billiger-mietwagen.de","billiger-mietwagen.de"],["autoeurope.de","AutoEurope"],["","Niza (lokal)"]],url:"https://www.billiger-mietwagen.de/de-de/reservation/quotes/f8f8e20edcde7fd7675df27fa44bcb95/products/76796df79ff84c059fd6e0ed3b222f90/stations"}];
 const BM="https://www.billiger-mietwagen.de/de-de/reservation/quotes/f8f8e20edcde7fd7675df27fa44bcb95?filter=station_type_airport&filter=glass_and_tires_protection&filter=underbody_protection&filter=liability_good&filter=comprehensive_cover_without_deductible&filter=comprehensive_cover_without_deductible_by_refund&filter=additional_driver_included&filter=mileage_unlimited&filter=fuel_policy_good";
 const SIXT="https://www.sixt.ch/betafunnel/#/offerlist?zen_pu_location=84b5aadd-f6eb-4c25-941e-8f8f02e49623&zen_do_location=84b5aadd-f6eb-4c25-941e-8f8f02e49623&zen_pu_title=Mallorca%20Palma%20Flughafen&zen_do_title=Mallorca%20Palma%20Flughafen&zen_pu_time=2027-06-19T18:00&zen_do_time=2027-07-03T09:00&zen_pu_branch_id=BRANCH:6809&zen_do_branch_id=BRANCH:6809&zen_vehicle_type=car&zen_pickup_country_code=ES&zen_resident_country_required=false&zen_point_of_sale=CH";
 function tStars(id){const w=PEOPLE.filter(p=>V[p]&&V[p][id]);return w.length?`<div class="stars">${"⭐".repeat(w.length)} ${w.map(esc).join(", ")}</div>`:""}
@@ -337,7 +349,7 @@ function tFav(id){return `<button class="fav" data-id="${id}" aria-label="Stern 
 function drawTravel(){
  const fe=document.getElementById("flights");if(!fe)return;
  fe.innerHTML=FL.map(o=>`<div class="tc rv${o.rec?" rec":""}" id="${o.id}">${o.tag?`<span class="badge${o.alt?" alt":""}">${o.tag}</span>`:""}
- <div class="t"><h4>${esc(o.air)}</h4>${tFav(o.id)}</div>${tStars(o.id)}
+ <div class="t"><h4>${esc(o.air)}</h4>${tFav(o.id)}</div>${lgs([/Swiss/.test(o.air)&&["swiss.com","Swiss"],/Edelweiss/.test(o.air)&&["flyedelweiss.com","Edelweiss"],/Vueling/.test(o.air)&&["vueling.com","Vueling"],["kiwi.com","über Kiwi.com"]].filter(Boolean))}${tStars(o.id)}
  <div class="tl"><b>Hin</b> Sa 19.6. · ${o.out[1]} Zürich → ${o.out[2]} Palma · ${o.out[0]}</div>
  <div class="tl"><b>Rück</b> Sa 3.7. · ${o.back[1]} Palma → ${o.back[2]} Zürich · ${o.back[0]}</div>
  <div class="price">ca. ${f(o.price)} <span class="pp">für 4 Personen · ca. ${f(o.price/4)} pro Person</span></div>
@@ -346,11 +358,11 @@ function drawTravel(){
  <a class="go wa" href="${waT(`✈️ Flug ${o.air}\nHin Sa 19.6. ${o.out[1]} Zürich → ${o.out[2]} Palma (${o.out[0]})\nRück Sa 3.7. ${o.back[1]} Palma → ${o.back[2]} Zürich (${o.back[0]})\n💰 ca. ${f(o.price)} für 4 Personen\n👉 ${SITE}#${o.id}`)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div>`).join("");
  document.getElementById("cars").innerHTML=CARS.map(o=>`<div class="tc rv${o.rec?" rec":""}" id="${o.id}">${o.tag?`<span class="badge${o.alt?" alt":""}">${o.tag}</span>`:""}
  <div class="t"><h4>${esc(o.name)} <span class="pp">oder ähnlich</span></h4>${tFav(o.id)}</div>${tStars(o.id)}
- <div class="loc">${o.bm?"billiger-mietwagen.de · "+esc(o.cls):"Sixt · "+esc(o.cls)+" · Automatik"}</div>
+ ${lgs(o.prov||[])}<div class="loc">${o.bm?esc(o.cls):esc(o.cls)+" · Automatik"}</div>
  <div class="price">ca. ${f(o.price)} <span class="pp">pro Auto${o.eur?` (EUR ${o.eur})`:""} · 2 Autos ca. ${f(o.price*2)}</span></div>
  ${o.inc?`<div class="loc">✅ ${esc(o.inc)}</div>`:`<div class="loc">⚠️ Ohne Extra-Schutz: Selbstbehalt bis Fahrzeugwert. Sixt-Vollschutz kostet ca. CHF 20 pro Tag, Zusatzfahrer ca. CHF 7 pro Tag.</div>`}
  <div class="loc">ca. ${f(o.price/14)} pro Tag und Auto · pro Paar ein Auto</div>
- ${o.bm?`<a class="go" href="${BM}${o.id=="car-6"?"&filter=car_class_middle":"&filter=car_class_compact"}" target="_blank" rel="noopener">Bei billiger-mietwagen.de ansehen</a>`:`<a class="go" href="${SIXT}" target="_blank" rel="noopener">Bei Sixt ansehen (Daten vorausgefüllt)</a>`}
+ ${o.bm?`<a class="go" href="${o.url}" target="_blank" rel="noopener">Zum Angebot bei billiger-mietwagen.de</a>`:`<a class="go" href="${SIXT}" target="_blank" rel="noopener">Bei Sixt ansehen (Daten vorausgefüllt)</a>`}
  <a class="go wa" href="${waT(`🚗 Mietwagen ${o.name} oder ähnlich (${o.bm?"billiger-mietwagen.de, mit Rundumschutz":"Sixt"}, Flughafen Palma)\n💰 ca. ${f(o.price)} pro Auto · 2 Autos ca. ${f(o.price*2)}\n👉 ${SITE}#${o.id}`)}" target="_blank" rel="noopener">💬 In WhatsApp diskutieren</a></div>`).join("");
  const fr=FL[0].price,cr=CARS[0].price*2;
  const cb=CARS.find(x=>x.id=="car-5").price*2;document.getElementById("tsum").textContent=`Grobe Rechnung: Flüge ca. ${f(fr)} + 2 Autos. Mit 2 × Seat Leon inkl. Vollschutz (billiger-mietwagen.de) ca. ${f(cb)}: total ca. ${f(fr+cb)}, pro Paar ca. ${f((fr+cb)/2)}. Mit 2 × BMW 1er bei Sixt ohne Extra-Schutz ca. ${f(cr)}: total ca. ${f(fr+cr)}, pro Paar ca. ${f((fr+cr)/2)}. Zusätzlich zum Haus, ohne Gepäck und Benzin.`;
@@ -362,7 +374,7 @@ function draw(){drawTravel();
  L.sort((a,b)=>s=="e"?((a.top||99)-(b.top||99))||(rk(b)-rk(a)):s=="k"?a.km-b.km:s=="p"?a.price-b.price:s=="s"?((b.score||0)/b.max-(a.score||0)/a.max)||(b.n-a.n):(b.sz||0)-(a.sz||0));
  document.getElementById("cnt").textContent="🏠 "+L.length+" Häuser";
  document.getElementById("list").innerHTML=L.map(x=>`<article class="c rv" id="h${D.indexOf(x)}"><div class="media">
- ${x.img?`<img src="${esc(x.img)}" alt="${esc(x.name)}" loading="lazy" onerror="this.outerHTML=\x27<div class=ph>Bild nicht verfügbar</div>\x27">`:`<div class="ph">Kein Bild</div>`}<span class="plq">${f(x.price)}<small>14 Nächte</small></span><button class="fav" data-id="${x.id}" aria-label="Stern setzen oder entfernen">${mine(x)?"⭐":"☆"}</button>${x.top?`<span class="topb">Top ${x.top}</span>`:""}</div>
+ ${x.img?`<img src="${esc(x.img)}" alt="${esc(x.name)}" loading="lazy" onerror="this.outerHTML=\x27<div class=ph>Bild nicht verfügbar</div>\x27">`:`<div class="ph">Kein Bild</div>`}<span class="plq">${f(x.price)}<small>14 Nächte</small></span><a class="srcb" href="${esc(x.url)}" target="_blank" rel="noopener" title="Zum Anbieter">${lg(host(x.url),x.rsrc)}</a><button class="fav" data-id="${x.id}" aria-label="Stern setzen oder entfernen">${mine(x)?"⭐":"☆"}</button>${x.top?`<span class="topb">Top ${x.top}</span>`:""}</div>
  <div class="b"><div class="t"><h2>${esc(x.name)}${x.neu?` <span class="new">Neu</span>`:""}</h2></div>${who(x).length?`<div class="stars">⭐ ${who(x).length}: ${who(x).map(esc).join(", ")}</div>`:""}
  <div class="loc">📍 ${esc(x.ort)} · ${x.km} km bis Palma · 👀 Blick: ${esc(x.view)}</div>
  <div class="price">${f(x.price)} <span class="pp">gesamt · ${f(x.price/2)} pro Paar</span></div>${x.eur?`<div class="loc">Anbieter-Preis: ${esc(x.eur)}</div>`:""}
